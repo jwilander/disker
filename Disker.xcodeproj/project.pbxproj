@@ -35,29 +35,29 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6D022DE91598EBF30030B45F /* main_icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = main_icon.icns; sourceTree = "<group>"; };
+		6D022DE91598EBF30030B45F /* main_icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = main_icon.icns; path = Disker/main_icon.icns; sourceTree = "<group>"; };
 		6D2800B713760D3E00BD8D0D /* Disker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Disker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D2800BB13760D3E00BD8D0D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		6D2800BE13760D3E00BD8D0D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		6D2800BF13760D3E00BD8D0D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6D2800C013760D3E00BD8D0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		6D2800C313760D3E00BD8D0D /* Disker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Disker-Info.plist"; sourceTree = "<group>"; };
+		6D2800C313760D3E00BD8D0D /* Disker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "Disker-Info.plist"; path = "Disker/Disker-Info.plist"; sourceTree = "<group>"; };
 		6D2800C513760D3E00BD8D0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6D2800C713760D3E00BD8D0D /* Disker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Disker-Prefix.pch"; sourceTree = "<group>"; };
-		6D2800C813760D3E00BD8D0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6D2800C713760D3E00BD8D0D /* Disker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Disker-Prefix.pch"; path = "Disker/Disker-Prefix.pch"; sourceTree = "<group>"; };
+		6D2800C813760D3E00BD8D0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Disker/main.m; sourceTree = "<group>"; };
 		6D2800CB13760D3E00BD8D0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		6D2800CD13760D3E00BD8D0D /* DiskerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiskerAppDelegate.h; sourceTree = "<group>"; };
-		6D2800CE13760D3E00BD8D0D /* DiskerAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DiskerAppDelegate.mm; sourceTree = "<group>"; };
+		6D2800CD13760D3E00BD8D0D /* DiskerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DiskerAppDelegate.h; path = Disker/DiskerAppDelegate.h; sourceTree = "<group>"; };
+		6D2800CE13760D3E00BD8D0D /* DiskerAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = DiskerAppDelegate.mm; path = Disker/DiskerAppDelegate.mm; sourceTree = "<group>"; };
 		6D2800D113760D3E00BD8D0D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		6D2800E013760D7400BD8D0D /* libPolycore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPolycore.a; path = Core/lib/libPolycore.a; sourceTree = "<group>"; };
 		6D2800F113760DD500BD8D0D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		6D2800F313760DDA00BD8D0D /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		6D2800F513760DE400BD8D0D /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		6D2800F713760E7C00BD8D0D /* PolycodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PolycodeView.h; path = ../Core/PolycodeView/PolycodeView.h; sourceTree = "<group>"; };
-		6D2800F813760E7C00BD8D0D /* PolycodeView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PolycodeView.mm; path = ../Core/PolycodeView/PolycodeView.mm; sourceTree = "<group>"; };
-		6D2800FA13760F2C00BD8D0D /* DiskerApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = DiskerApp.cpp; path = PolycodeTemplate/DiskerApp.cpp; sourceTree = "<group>"; };
-		6D2800FB13760F2C00BD8D0D /* DiskerApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiskerApp.h; path = PolycodeTemplate/DiskerApp.h; sourceTree = "<group>"; };
-		6D2800FD13760FC400BD8D0D /* default.pak */ = {isa = PBXFileReference; lastKnownFileType = file; name = default.pak; path = ../Core/Assets/default.pak; sourceTree = "<group>"; };
+		6D2800F713760E7C00BD8D0D /* PolycodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PolycodeView.h; path = Core/PolycodeView/PolycodeView.h; sourceTree = "<group>"; };
+		6D2800F813760E7C00BD8D0D /* PolycodeView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PolycodeView.mm; path = Core/PolycodeView/PolycodeView.mm; sourceTree = "<group>"; };
+		6D2800FA13760F2C00BD8D0D /* DiskerApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = DiskerApp.cpp; path = Disker/DiskerApp.cpp; sourceTree = "<group>"; };
+		6D2800FB13760F2C00BD8D0D /* DiskerApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiskerApp.h; path = Disker/DiskerApp.h; sourceTree = "<group>"; };
+		6D2800FD13760FC400BD8D0D /* default.pak */ = {isa = PBXFileReference; lastKnownFileType = file; name = default.pak; path = Resources/default.pak; sourceTree = "<group>"; };
 		84BBABB318DF60F1006D0CA7 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = Core/Dependencies/lib/libfreetype.a; sourceTree = "<group>"; };
 		84BBABB418DF60F1006D0CA7 /* liblibogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibogg.a; path = Core/Dependencies/lib/liblibogg.a; sourceTree = "<group>"; };
 		84BBABB518DF60F2006D0CA7 /* liblibvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibvorbis.a; path = Core/Dependencies/lib/liblibvorbis.a; sourceTree = "<group>"; };
@@ -268,6 +268,7 @@
 				6D2800C513760D3E00BD8D0D /* en */,
 			);
 			name = InfoPlist.strings;
+			path = Disker;
 			sourceTree = "<group>";
 		};
 		6D2800CA13760D3E00BD8D0D /* Credits.rtf */ = {
@@ -276,6 +277,7 @@
 				6D2800CB13760D3E00BD8D0D /* en */,
 			);
 			name = Credits.rtf;
+			path = Disker;
 			sourceTree = "<group>";
 		};
 		6D2800D013760D3E00BD8D0D /* MainMenu.xib */ = {
@@ -284,6 +286,7 @@
 				6D2800D113760D3E00BD8D0D /* en */,
 			);
 			name = MainMenu.xib;
+			path = Disker;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
