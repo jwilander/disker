@@ -20,6 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+#ifndef __Polycode__Polyview__
+#define __Polycode__Polyview__
 
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
@@ -70,3 +72,5 @@ using namespace Polycode;
 - (void) initKeymap;
 
 @end
+
+#endif /* defined(__Polycode__Polyview__) */
