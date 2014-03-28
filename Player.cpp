@@ -15,8 +15,10 @@ Player::Player(PhysicsScreen *scene)
     
     // TODO - figure out relative path
     sprite = new SceneSprite("/usr/local/joram/disker/Resources/playerSprite.png", 192, 182);
-    sprite->setScale(0.4f, 0.4f);
+    sprite->setScale(0.3f, 0.3f);
+    sprite->custEntityType = ENTITY_PLAYER;
     scene->addCollisionChild(sprite, PhysicsScene2DEntity::ENTITY_CIRCLE, false);
+    
     playerMovement = new PlayerMovement(this, scene);
 }
 

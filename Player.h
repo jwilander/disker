@@ -17,6 +17,8 @@
 
 class PlayerMovement;
 
+const String ENTITY_PLAYER = "player";
+
 class Player {
     friend class PlayerMovement;
     

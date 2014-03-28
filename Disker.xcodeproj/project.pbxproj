@@ -15,6 +15,7 @@
 		6D2800F913760E7C00BD8D0D /* PolycodeView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D2800F813760E7C00BD8D0D /* PolycodeView.mm */; };
 		6D2800FC13760F2C00BD8D0D /* DiskerApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2800FA13760F2C00BD8D0D /* DiskerApp.cpp */; };
 		6D2800FE13760FC400BD8D0D /* default.pak in Resources */ = {isa = PBXBuildFile; fileRef = 6D2800FD13760FC400BD8D0D /* default.pak */; };
+		84438B8F18E5328200D1C6A6 /* Boundary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84438B8D18E5328200D1C6A6 /* Boundary.cpp */; };
 		84836A3E18E52ACA0088AEBA /* InputHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84836A3818E52ACA0088AEBA /* InputHandler.cpp */; };
 		84836A3F18E52ACA0088AEBA /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84836A3A18E52ACA0088AEBA /* Player.cpp */; };
 		84836A4018E52ACA0088AEBA /* PlayerMovement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84836A3C18E52ACA0088AEBA /* PlayerMovement.cpp */; };
@@ -61,6 +62,8 @@
 		6D2800FA13760F2C00BD8D0D /* DiskerApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = DiskerApp.cpp; path = Disker/DiskerApp.cpp; sourceTree = "<group>"; };
 		6D2800FB13760F2C00BD8D0D /* DiskerApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiskerApp.h; path = Disker/DiskerApp.h; sourceTree = "<group>"; };
 		6D2800FD13760FC400BD8D0D /* default.pak */ = {isa = PBXFileReference; lastKnownFileType = file; name = default.pak; path = ../Resources/default.pak; sourceTree = "<group>"; };
+		84438B8D18E5328200D1C6A6 /* Boundary.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Boundary.cpp; sourceTree = "<group>"; };
+		84438B8E18E5328200D1C6A6 /* Boundary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boundary.h; sourceTree = "<group>"; };
 		84836A3818E52ACA0088AEBA /* InputHandler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = InputHandler.cpp; sourceTree = "<group>"; };
 		84836A3918E52ACA0088AEBA /* InputHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputHandler.h; sourceTree = "<group>"; };
 		84836A3A18E52ACA0088AEBA /* Player.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Player.cpp; sourceTree = "<group>"; };
@@ -225,6 +228,8 @@
 		84BBABC518DF69E5006D0CA7 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				84438B8D18E5328200D1C6A6 /* Boundary.cpp */,
+				84438B8E18E5328200D1C6A6 /* Boundary.h */,
 				84836A3818E52ACA0088AEBA /* InputHandler.cpp */,
 				84836A3918E52ACA0088AEBA /* InputHandler.h */,
 				84836A3A18E52ACA0088AEBA /* Player.cpp */,
@@ -304,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84836A3F18E52ACA0088AEBA /* Player.cpp in Sources */,
+				84438B8F18E5328200D1C6A6 /* Boundary.cpp in Sources */,
 				6D2800F913760E7C00BD8D0D /* PolycodeView.mm in Sources */,
 				84836A4818E52CE80088AEBA /* DiskerAppDelegate.mm in Sources */,
 				84836A3E18E52ACA0088AEBA /* InputHandler.cpp in Sources */,

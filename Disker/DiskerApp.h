@@ -2,6 +2,7 @@
 #include "PolycodeView.h"
 #include "Polycode2DPhysics.h"
 #include "Player.h"
+#include "Boundary.h"
 #include "InputHandler.h"
 
 using namespace Polycode;
@@ -23,6 +24,7 @@ private:
     
     // world objects
     Player *player;
+    Boundary *boundary;
     SceneSprite *image;
     
 };
