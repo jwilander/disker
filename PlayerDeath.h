@@ -23,7 +23,11 @@ public:
 private:
     Player *player;
     PhysicsScreen *scene;
+    float deathTimer;
     
+    bool Update(float elapsed);
+    
+    void Kill();
     void Respawn();
     
 };

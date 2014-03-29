@@ -35,6 +35,8 @@ public:
     
     bool Update(float elapsed);
     
+    void Damage(int amount);
+    
     /* PlayerMovement functions */
     void MoveForward();
     void MoveBackward();
@@ -48,7 +50,9 @@ public:
     void Shoot();
     
     /* PlayerDeath functions */
-    void Respawn();
+    //void Respawn();
+    
+    enum PlayerState {ALIVE, DYING, DEAD};
 
 private:
     /* friend logic classes, for encapsulating all player logic */
@@ -59,6 +63,7 @@ private:
     int health;
     float direction;
     SceneSprite *sprite;
+    PlayerState state;
 };
 
 #endif /* defined(__Disker__Player__) */

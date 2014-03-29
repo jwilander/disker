@@ -15,7 +15,7 @@ Boundary::Boundary(PhysicsScreen *scene, float width, float height)
     topWall->setPosition(-0.0025f * width, height/2 - 0.025f * height);
     topWall->setColorInt(215, 31, 38, 255);
     topWall->custEntityType = ENTITY_BOUNDARY;
-    scene->addPhysicsChild(topWall, PhysicsScene2DEntity::ENTITY_RECT, true);
+    scene->addPhysicsChild(topWall, PhysicsScene2DEntity::ENTITY_RECT, true, 0.1, 1, 0, false, false, -1);
     
     leftWall = new ScenePrimitive(ScenePrimitive::TYPE_VPLANE, 8, height*0.95f);
     leftWall->setPosition(-width/2 + 0.0258f * width, -0.0025f * height);

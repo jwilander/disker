@@ -41,7 +41,7 @@ void CollisionHandler::HandleCollisionStart(PhysicsScene2DEvent *pe)
     {
         /* kill the player if they hit the board edge */
         if (entityType2 == ENTITY_BOUNDARY) {
-            static_cast<Player*>(pe->entity1->getUserData())->Respawn();
+            static_cast<Player*>(pe->entity1->getUserData())->Damage(MAX_PLAYER_HEALTH);
             return;
         }
     }
@@ -51,7 +51,7 @@ void CollisionHandler::HandleCollisionStart(PhysicsScene2DEvent *pe)
     {
         /* kill the player if they hit the board edge */
         if (entityType1 == ENTITY_BOUNDARY) {
-            static_cast<Player*>(pe->entity2->getUserData())->Respawn();
+            static_cast<Player*>(pe->entity2->getUserData())->Damage(MAX_PLAYER_HEALTH);
             return;
         }
     }

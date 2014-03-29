@@ -12,6 +12,7 @@ Player::Player(PhysicsScreen *scene)
 {
     health = MAX_PLAYER_HEALTH;
     direction = START_PLAYER_DIRECTION;
+    state = ALIVE;
     
     // TODO - figure out relative path
     sprite = new SceneSprite("/usr/local/joram/disker/Resources/playerSprite.png", PLAYER_WIDTH, PLAYER_HEIGHT);
@@ -25,8 +26,28 @@ Player::Player(PhysicsScreen *scene)
 
 bool Player::Update(float elapsed)
 {
-    playerMovement->Update(elapsed);
+    switch (state) {
+        case ALIVE:
+            playerMovement->Update(elapsed);
+            playerDeath->Update(elapsed);
+            break;
+        case DYING:
+            playerDeath->Update(elapsed);
+            break;
+        case DEAD:
+            playerDeath->Respawn();
+            break;
+    }
     return true;
+}
+
+void Player::Damage(int amount)
+{
+    /* don't allow increasing health */
+    if (health < 0)
+        return;
+    
+    health -= amount;
 }
 
 /* begin PlayerMovement functions */
@@ -79,10 +100,10 @@ void Player::Shoot()
 
 /* begin PlayerDeath functions */
 
-void Player::Respawn()
-{
-    playerDeath->Respawn();
-}
+//void Player::Respawn()
+//{
+//    playerDeath->Respawn();
+//}
 
 /* end PlayerDeath functions */
 
