@@ -18,5 +18,5 @@ PlayerDeath::PlayerDeath(Player *player, PhysicsScreen *scene)
 void PlayerDeath::Respawn()
 {
     player->sprite->setPosition(0, 0);
-    scene->setVelocity(player->sprite, 0, 0);
+    player->ZeroVelocity();
 }

@@ -10,11 +10,11 @@
 
 Player::Player(PhysicsScreen *scene)
 {
-    health = 1000;
-    direction = 0.0f;
+    health = MAX_PLAYER_HEALTH;
+    direction = START_PLAYER_DIRECTION;
     
-    // TODO - figure out relative path and get rid of magic numbers
-    sprite = new SceneSprite("/usr/local/joram/disker/Resources/playerSprite.png", 71.25, 67.5);
+    // TODO - figure out relative path
+    sprite = new SceneSprite("/usr/local/joram/disker/Resources/playerSprite.png", PLAYER_WIDTH, PLAYER_HEIGHT);
     sprite->custEntityType = ENTITY_PLAYER;
     sprite->setUserData(this);
     scene->addCollisionChild(sprite, PhysicsScene2DEntity::ENTITY_CIRCLE);
@@ -44,6 +44,11 @@ void Player::MoveBackward()
 void Player::StopMove()
 {
     playerMovement->StopMove();
+}
+
+void Player::ZeroVelocity()
+{
+    playerMovement->ZeroVelocity();
 }
 
 void Player::TurnClockwise()

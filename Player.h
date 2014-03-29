@@ -20,6 +20,10 @@ class PlayerMovement;
 class PlayerDeath;
 
 const String ENTITY_PLAYER = "player";
+const int MAX_PLAYER_HEALTH = 1000;
+const float START_PLAYER_DIRECTION = 0.0f;
+const float PLAYER_WIDTH = 71.25;
+const float PLAYER_HEIGHT = 67.5;
 
 class Player {
     friend class PlayerMovement;
@@ -35,6 +39,7 @@ public:
     void MoveForward();
     void MoveBackward();
     void StopMove();
+    void ZeroVelocity();
     void TurnClockwise();
     void TurnAntiClockwise();
     void StopTurn();

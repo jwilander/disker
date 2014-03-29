@@ -12,7 +12,7 @@
 const float MOVEMENT_ACCEL = 15.0f; // meters per second^2
 const float FRICTION_ACCEL = 5.0f; // meters per second^2
 const float MAX_SPEED = 20.0f; // meters per second
-const float TURNING_SPEED = 6.0f; // radians per second
+const float TURNING_SPEED = 5.5f; // radians per second
 
 PlayerMovement::PlayerMovement(Player *player, PhysicsScreen *scene)
 {
@@ -93,6 +93,12 @@ void PlayerMovement::StopMove()
 {
     accelerationX = 0.0f;
     accelerationY = 0.0f;
+}
+
+void PlayerMovement::ZeroVelocity()
+{
+    velocityX = 0.0f;
+    velocityY = 0.0f;
 }
 
 void PlayerMovement::StartTurn(TurnType turnType)

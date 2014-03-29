@@ -35,6 +35,7 @@ private:
     
     void StartMove(MovementType moveType);
     void StopMove();
+    void ZeroVelocity();
     void StartTurn(TurnType turnType);
     void StopTurn();
     
