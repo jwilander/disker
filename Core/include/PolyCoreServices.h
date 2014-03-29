@@ -34,6 +34,7 @@ namespace Polycode {
 	class Config;
 	class FontManager;
 	class SceneManager;
+	class ScreenManager;
 	class TimerManager;
 	class TweenManager;
 	class ResourceManager;
@@ -97,6 +98,12 @@ namespace Polycode {
 			*/
 			MaterialManager *getMaterialManager();
 			
+			/**
+			* Returns the screen manager. The screen manager is responsible for maintaining and rendering 2D screens.
+			* @return Screen Manager
+			* @see ScreenManager
+			*/			
+			ScreenManager *getScreenManager();
 			
 			/**
 			* Returns the scene manager. The screen manager is responsible for maintaining and rendering 3D scenes.
@@ -154,7 +161,9 @@ namespace Polycode {
 			Config *getConfig();
 			
 					
-			~CoreServices();		
+			~CoreServices();
+		
+			void *focusedChild;
 			
 		protected:
 		
@@ -173,6 +182,7 @@ namespace Polycode {
 			Core *core;
 			Config *config;
 			MaterialManager *materialManager;
+			ScreenManager *screenManager;		
 			SceneManager *sceneManager;
 			Logger *logger;
 			TimerManager *timerManager;

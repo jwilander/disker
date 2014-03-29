@@ -81,9 +81,6 @@ namespace Polycode {
 			void setColorForRange(Color color, unsigned int rangeStart, unsigned int rangeEnd);
 		
 			Color getColorForIndex(unsigned int index);
-        
-            bool getPremultiplyAlpha() const;
-            void setPremultiplyAlpha(bool val);
 		
 			void setFont(Font *newFont);
 			Font *getFont() const;
@@ -106,7 +103,7 @@ namespace Polycode {
 		
 			bool _optionsChanged;
 			GlyphData labelData;
-	        
+	
 			std::vector<ColorRange> colorRanges;
 		
 			int baseLineOffset;

@@ -31,6 +31,17 @@ namespace Polycode {
 
 	class GLSLProgram;
 
+	typedef struct {
+		Texture *texture;
+		String name;
+	} GLSLTextureBinding;
+
+	typedef struct {
+		Cubemap *cubemap;
+		String name;
+	} GLSLCubemapBinding;
+	
+	
 	class _PolyExport GLSLShader : public Shader {
 		public:
 			GLSLShader(GLSLProgram *vp, GLSLProgram *fp);
@@ -50,5 +61,23 @@ namespace Polycode {
 			
 			void linkProgram();			
 			void unlinkProgram();
-	};	
+	};
+	
+	class _PolyExport GLSLShaderBinding : public ShaderBinding {
+		public:
+			GLSLShaderBinding(GLSLShader *shader);
+			virtual ~GLSLShaderBinding();
+			
+			void clearCubemap(const String& name);
+			void addTexture(const String& name, Texture *texture);
+			void addCubemap(const String& name, Cubemap *cubemap);
+			void clearTexture(const String& name);
+			Texture *getTexture(const String& name);
+			Cubemap *getCubemap(const String& name);
+			
+			std::vector<GLSLTextureBinding> textures;
+			std::vector<GLSLCubemapBinding> cubemaps;
+		
+			GLSLShader *glslShader;
+	};
 }

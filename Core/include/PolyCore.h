@@ -43,11 +43,6 @@ namespace Polycode {
 	
 	class _PolyExport CoreFileExtension : public PolyBase {
 	public:
-		CoreFileExtension() {}
-		CoreFileExtension(String description, String extension) {
-			this->extension = extension;
-			this->description = description;
-		}	
 		String extension;
 		String description;
 	};
@@ -211,18 +206,6 @@ namespace Polycode {
 		* @return Current vertical resolution.
 		*/													
 		Number getYRes();
-
-		/**
-         * Returns actual current horizontal resolution.
-         * @return Current actual horizontal resolution.
-         */
-        virtual Number getBackingXRes() { return getXRes(); }
-
-        /**
-         * Returns actual current vertical resolution.
-         * @return Current actual horizontal resolution.
-         */
-        virtual Number getBackingYRes() { return getYRes(); }
 				
 		/**
 		* Provides the current width, height, and refresh rate of the screen.
@@ -232,9 +215,6 @@ namespace Polycode {
 		*/
 		static void getScreenInfo(int *width, int *height, int *hz);
 
-        int getScreenWidth();
-        int getScreenHeight();
-        
 		/**
 		* Creates a folder on disk with the specified path.
 		* @param folderPath Path to create the folder in.
@@ -311,12 +291,7 @@ namespace Polycode {
 		* Returns the total ticks elapsed since launch.
 		* @return Time elapsed since launch in milliseconds
 		*/						
-		virtual unsigned int getTicks() = 0;
-
-		/** Returns the target number of milliseconds between frames */
-		long getRefreshIntervalMs() const {
-			return refreshInterval;
-		}
+		virtual unsigned int getTicks() = 0;		
 		
 		/**
 		* Returns the total ticks elapsed since launch.

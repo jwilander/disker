@@ -24,17 +24,17 @@
 #include "PolyGlobals.h"
 #include "PolyString.h"
 #include "PolyMatrix4.h"
-#include "PolyEntity.h"
+#include "PolySceneEntity.h"
 
 namespace Polycode {
 
 	class Mesh;
 
 	/** 
-	* Skeleton bone. Bones are bound to vertices of a mesh and when transformed, move the bound vertices of the mesh along with them. Bones are subclassed from Entity, but have their own hierarchy system.
+	* Skeleton bone. Bones are bound to vertices of a mesh and when transformed, move the bound vertices of the mesh along with them. Bones are subclassed from SceneEntity, but have their own hierarchy system.
 	* @see Skeleton
 	*/			
-	class _PolyExport Bone : public Entity {
+	class _PolyExport Bone : public SceneEntity {
 		public:
 			/** 
 			* Constructor.
@@ -43,11 +43,14 @@ namespace Polycode {
 			Bone(const String& boneName);
 			virtual ~Bone();
 			
+			void enableBoneLabel(const String& labelFont, Number size, Number scale, Color labelColor);
+			
 			/**
 			* Returns the name of the bone.
 			* @return Name of the bone.
 			*/
 			const String& getName() const;
+			void Render();
 
 			/**
 			* Sets the parent bone of this bone.
@@ -148,11 +151,11 @@ namespace Polycode {
 			Matrix4 restMatrix;
 			Matrix4 baseMatrix;
 		
-            Quaternion baseRotation;
-            Vector3 baseScale;
-            Vector3 basePosition;
-        
+		
+		
 		protected:
+			Mesh *boneMesh;
+		
 			Bone* parentBone;
 			std::vector<Bone*> childBones;
 			String boneName;

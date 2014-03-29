@@ -42,4 +42,3 @@
 #include "PolyUIMenu.h"
 #include "PolyUIFileDialog.h"
 #include "PolyUIMenuBar.h"
-#include "PolyUIIconSelector.h"

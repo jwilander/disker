@@ -105,11 +105,11 @@ void PlayerMovement::StartTurn(TurnType turnType)
 {
     if (turnType == CLOCKWISE)
     {
-        rollSpeed = -TURNING_SPEED;
+        rollSpeed = TURNING_SPEED;
     }
     else
     {
-        rollSpeed = TURNING_SPEED;
+        rollSpeed = -TURNING_SPEED;
     }
 }
 

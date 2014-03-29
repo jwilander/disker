@@ -33,7 +33,7 @@ namespace Polycode {
 
 	class _PolyExport Font : public PolyBase {
 		public:
-			Font(const String& fileName, FT_Library FTLibrary);
+			Font(const String& fileName);
 			virtual ~Font();
 			
 			FT_Face getFace();
@@ -47,7 +47,8 @@ namespace Polycode {
 		protected:
 		
 			String fileName;
-			String fontName;		
+			String fontName;
+		
 			unsigned char *buffer;
 			bool valid;
 			FT_Face ftFace;

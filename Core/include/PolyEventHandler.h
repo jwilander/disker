@@ -35,12 +35,20 @@ namespace Polycode {
 			* Default constructor
 			*/
 			EventHandler();
-			virtual ~EventHandler();	
+			virtual ~EventHandler();
+
+		void secondaryHandler(Event *event);		
 		
-			/** 
-			* This method gets called by an EventDispatcher that the handler is listening to if the dispatching event's code matches the code that handler is listening for. Typically, you subclass EventHandler and implement the handleEvent method to handle specific events.
-			* @see EventDispatcher
-			*/
-			virtual void handleEvent(Event *event){}
+		/** 
+		* This method gets called by an EventDispatcher that the handler is listening to if the dispatching event's code matches the code that handler is listening for. Typically, you subclass EventHandler and implement the handleEvent method to handle specific events.
+		* @see EventDispatcher
+		*/
+		virtual void handleEvent(Event *event){}
+			
+		void *secondaryHandlerData;
+		
+		
+		protected:
+	
 	};
 }

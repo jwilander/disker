@@ -62,7 +62,7 @@ private:
     /* player variables */
     int health;
     float direction;
-    SceneSprite *sprite;
+    ScreenSprite *sprite;
     PlayerState state;
 };
 

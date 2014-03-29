@@ -27,8 +27,6 @@ THE SOFTWARE.
 // Compile support for lua bindings.
 //#define _COMPILE_LUA
 
-#define POLYCODE_VERSION_STRING "0.8.4a_dev"
-
 #define COMPILE_GL_RENDERER
 
 #ifdef _WINDOWS
@@ -40,14 +38,10 @@ THE SOFTWARE.
 	#pragma warning(disable:4018)
 	#pragma warning(disable:4996)
 	#pragma warning(disable:4309)
-	#ifndef NULL
 	#define NULL 0
-	#endif
 	// Prevent windows.h includes from generating min/max macros that
 	// clash with the templates in <algorithm>
-    #ifndef NOMINMAX
 	#define NOMINMAX
-    #endif
 
 
 #endif
@@ -85,14 +79,6 @@ THE SOFTWARE.
 #endif
 
 typedef double Number;
-
-#ifdef _WINDOWS
-#include <cmath>	//cmath for "round / floor"
-
-inline int round(Number x) { 
-	return floor(x + 0.5); 
-}
-#endif
 
 #define RANDOM_NUMBER ((Number)rand()/(Number)RAND_MAX)
 

@@ -25,8 +25,6 @@ THE SOFTWARE.
 #include "PolyString.h"
 #include "PolyColor.h"
 #include "PolyVector3.h"
-#include "PolyEntity.h"
-#include "PolyCore.h"
 #include "PolyEventDispatcher.h"
 
 #include <vector>
@@ -36,47 +34,44 @@ class OSFILE;
 namespace Polycode {
 		
 	class Camera;
-	class Entity;
+	class SceneEntity;
 	class SceneLight;
-	class Mesh;
+	class SceneMesh;
 	
 	/**
-	* Rendering container. The Scene class is the main container for all rendering in Polycode. Scenes are automatically rendered and need only be instantiated to immediately add themselves to the rendering pipeline. A Scene is created with a camera automatically.
+	* 3D rendering container. The Scene class is the main container for all 3D rendering in Polycode. Scenes are automatically rendered and need only be instantiated to immediately add themselves to the rendering pipeline. A Scene is created with a camera automatically.
 	*/ 
 	class _PolyExport Scene : public EventDispatcher {
 	public:
-
+		
 		/**
-		* Default constructor with options. 
-		* @param sceneType Type of scene to create. Can be Scene::SCENE_2D, Scene::SCENE_3D or Scene::SCENE_2D_TOPLEFT
-		* @param virtualScene If this flag is set to true, the scene is not rendered to the screen. Use this if you want to render the scene only to a texture.
-		*/		
-		Scene(int sceneType, bool virtualScene = false);
-				
-		/**
-		* Default constructor. Defaults to type Scene::SCENE_3D
+		* Default constructor.
 		*/
 		Scene();
-
+		/**
+		* Default constructor with options. 
+		* @param virtualScene If this flag is set to true, the scene is not rendered to the screen. Use this if you want to render the scene only to a texture.
+		*/		
+		Scene(bool virtualScene);
 		virtual ~Scene();
 		
 		/**
-		* Adds a new Entity to the scene
+		* Adds a new SceneEntity to the scene
 		* @param entity New entity to add.
 		*/
-		void addEntity(Entity *entity);
+		void addEntity(SceneEntity *entity);
 
 		/**
-		* Adds a new Entity to the scene
+		* Adds a new SceneEntity to the scene
 		* @param entity New entity to add.
 		*/
-		void addChild(Entity *entity);
+		void addChild(SceneEntity *entity);
 		
 		/**
-		* Removes a Entity from the scene
+		* Removes a SceneEntity from the scene
 		* @param entity New entity to remove.
 		*/		
-		virtual void removeEntity(Entity *entity);
+		virtual void removeEntity(SceneEntity *entity);
 		
 		/**
 		* Returns the scene's default camera.
@@ -117,8 +112,6 @@ namespace Polycode {
 		* @param endDepth Ending depth of the fog.							
 		*/				
 		void setFogProperties(int fogMode, Color color, Number density, Number startDepth, Number endDepth);
-        
-        void setSceneType(int newType);
 	
 		virtual void Update();
 		void setVirtual(bool val);
@@ -127,14 +120,19 @@ namespace Polycode {
 		bool isEnabled();		
 		void setEnabled(bool enabled);
 		
+		int getNumEntities() { return (int)entities.size(); }
+		SceneEntity *getEntity(int index) { return entities[index]; }
+		
+		/**
+		* Returns the entity at the specified screen position. This is currently very slow and not super reliable.
+		* @param x X position.
+		* @param y Y position.
+		* @return Entity at specified screen position.		
+		*/
+		SceneEntity *getEntityAtScreenPosition(Number x, Number y);
+		
 		void Render(Camera *targetCamera = NULL);
 		void RenderDepthOnly(Camera *targetCamera);
-        
-        void setOverrideMaterial(Material *material);
-		
-		void handleEvent(Event *event);
-		
-		Ray projectRayFromCameraAndViewportCoordinate(Camera *camera, Vector2 coordinate);
 		
 		/**
 		* Adds a light to the scene.
@@ -146,10 +144,18 @@ namespace Polycode {
 		* Removes a light from the scene.
 		* @param light Light to remove from the scene.
 		*/		
-		void removeLight(SceneLight *light);		
+		void removeLight(SceneLight *light);
+		
+		SceneLight *getNearestLight(Vector3 pos);
 				
 		int getNumLights();
 		SceneLight *getLight(int index);
+				
+		static const unsigned int ENTITY_MESH = 0;
+		static const unsigned int ENTITY_LIGHT = 1;			
+		static const unsigned int ENTITY_CAMERA = 2;			
+		static const unsigned int ENTITY_ENTITY = 3;
+		static const unsigned int ENTITY_COLLMESH = 4;
 		
 		/**
 		* Scene clear color
@@ -181,39 +187,17 @@ namespace Polycode {
 		*/
 		bool ownsChildren;
 		
-		static const int SCENE_3D = 0;
-		static const int SCENE_2D = 1;
-		static const int SCENE_2D_TOPLEFT = 2;
-						
-		Entity rootEntity;
-		
-        Polycode::Rectangle sceneMouseRect;
-        bool remapMouse;
-        
-        bool constrainPickingToViewport;
-        
-        void doVisibilityChecking(bool val);
-        bool doesVisibilityChecking();
-		      
 	protected:
 		
-		void initScene(int sceneType, bool virtualScene);
-        void setEntityVisibility(Entity *entity, Camera *camera);
-        void setEntityVisibilityBool(Entity *entity, bool val);
-        
 		bool hasLightmaps;
-        bool _doVisibilityChecking;
 		
-		Renderer *renderer;
-		std::vector <SceneLight*> lights;		
+		std::vector <SceneLight*> lights;
+		
 		bool isSceneVirtual;
 		
 		Camera *defaultCamera;
 		Camera *activeCamera;
-		
-        Material *overrideMaterial;
-        
-		Core *core;
+		std::vector <SceneEntity*> entities;
 		
 		bool lightingEnabled;
 		bool fogEnabled;
@@ -221,8 +205,6 @@ namespace Polycode {
 		Number fogDensity;
 		Number fogStartDepth;
 		Number fogEndDepth;
-		
-		int sceneType;
 		
 	};
 }

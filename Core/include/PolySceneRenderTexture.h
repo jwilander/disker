@@ -28,8 +28,6 @@ namespace Polycode {
 	class Scene;
 	class Camera;
 	class Texture;
-    class Renderer;
-    class Image;
 	
 	/**
 	* Renders scenes to texture. This class automatically renders a scene to a texture every frame that you can use to texture anything else. You can set a scene to virtual (see Scene for details) to only render a scene to a texture if you need to. This class automatically adds itself to the render cycle, so you do not need to do anything manual every frame.
@@ -53,11 +51,7 @@ namespace Polycode {
 			Texture *getTargetTexture();
 			
 			Texture *getFilterColorBufferTexture();
-			Texture *getFilterZBufferTexture();
-        
-            void Render();
-        
-            Image *saveToImage();
+			Texture *getFilterZBufferTexture();			
 
 			void resizeRenderTexture(int newWidth, int newHeight);
 			/**
@@ -69,12 +63,8 @@ namespace Polycode {
 			* Returns the target camera.
 			*/						
 			Camera *getTargetCamera();	
-						
-			bool enabled;
-			
+				
 		protected:
-        
-            Renderer *renderer;
 		
 			Texture *filterColorBufferTexture;
 			Texture *filterZBufferTexture;

@@ -23,9 +23,8 @@
 
 #pragma once
 #include "PolyGlobals.h"
-#include "PolyEntity.h"
 #include "PolyVector2.h"
-#include "PolyVector4.h"
+#include "PolySceneEntity.h"
 
 namespace Polycode {
 
@@ -37,27 +36,9 @@ namespace Polycode {
 	/**
 	* Camera in a 3D scene. Cameras can be added to a scene and changed between dynamically. You can also set a shader to a camera that will run as a screen shader for post-processing effects.
 	*/	
-	class _PolyExport Camera : public Entity {
+	class _PolyExport Camera : public SceneEntity {
 		public:
 			
-			/** ProjectionMode: Orthographic projection, with manually set size. */
-			static const int ORTHO_SIZE_MANUAL = 0;
-
-			/** ProjectionMode: Orthographic projection, with height specified used and width scaled proportionally . */
-			static const int ORTHO_SIZE_LOCK_HEIGHT = 1;
-
-			/** ProjectionMode: Orthographic projection, with width specified used and height scaled proportionally. */
-			static const int ORTHO_SIZE_LOCK_WIDTH = 2;
-
-			/** ProjectionMode: Orthographic projection, scaled to viewport backing resolution. */
-			static const int ORTHO_SIZE_VIEWPORT = 3;
-
-			/** ProjectionMode: Perspective projection, with field of view specified. */
-			static const int PERSPECTIVE_FOV = 4;
-
-			/** ProjectionMode: Perspective projection, with bounds set by edges of frustum. */
-			static const int PERSPECTIVE_FRUSTUM = 5;
-
 			/**
 			* Constructor.
 			* @param parentScene Scene to add the camera to.
@@ -74,9 +55,15 @@ namespace Polycode {
 			* @return Returns true if the sphere is within the camera's frustum, or false if it isn't.
 			* @see canSee()
 			*/								
-			bool isSphereInFrustum(const Vector3 &pos, Number fRadius);
-        
-            bool isAABBInFrustum(const AABB &aabb);
+			bool isSphereInFrustum(Vector3 pos, Number fRadius);
+		
+			/**
+			* Checks if the camera can see an entity based on its bounding radius.
+			* @param entity Entity to check.
+			* @return Returns true if the entity's bounding radius is within the camera's frustum, or false if it isn't.
+			* @see isSphereInFrustum()
+			*/					
+			bool canSee(SceneEntity *entity);
 			
 			/**
 			* Toggles orthographic projection mode for camera.
@@ -84,23 +71,13 @@ namespace Polycode {
 			* @param orthoSizeX Width of the orthographic frustum (defaults to 1.0)
 			* @param orthoSizeY Height of the orthographic frustum (defaults to 1.0)				
 			*/			
-			void setOrthoMode(bool mode);
-
-			void setOrthoSize(Number orthoSizeX, Number orthoSizeY);
+			void setOrthoMode(bool mode, Number orthoSizeX = 1.0, Number orthoSizeY = 1.0);
 			
-			/** Switches into frustum mode and sets up the planes. */
-			void setFrustumMode(Number left, Number right, Number bottom, Number top, Number front, Number back);
-
 			/**
 			* Returns true if camera is in orthographic projection mode.
 			* @return True if camera is orthographic, false if otherwise.
 			*/
-			bool getOrthoMode() {
-				return projectionMode == ORTHO_SIZE_MANUAL ||
-						projectionMode == ORTHO_SIZE_LOCK_HEIGHT ||
-						projectionMode == ORTHO_SIZE_LOCK_WIDTH ||
-						projectionMode == ORTHO_SIZE_VIEWPORT;
-			}
+			bool getOrthoMode();
 			
 			/**
 			* Returns the width of the camera's orthographic frustum.
@@ -124,18 +101,9 @@ namespace Polycode {
 			* Returns the current FOV value for the camera.
 			* @return Current FOV value for the camera.
 			*/			
-			Number getFOV() {
-				return fov;
-			}
+			Number getFOV();
 			
-			void setClippingPlanes(Number nearClipPlane, Number farClipPlane);
-        
-        
-			Number getNearClippingPlane();
-			Number getFarClippingPlane();
-        
 			void setParentScene(Scene *parentScene);
-            Scene *getParentScene() const;
 			
 			void doCameraTransform();
 			void setLightDepthTexture(Texture *texture);			
@@ -143,21 +111,19 @@ namespace Polycode {
 			bool hasFilterShader();
 			void drawFilter(Texture *targetTexture = NULL, Number targetTextureWidth = 0.0, Number targetTextureHeight = 0.0, Texture *targetColorTexture = NULL, Texture *targetZTexture = NULL);
 			
+			Matrix4 getProjectionMatrix() const;
+			
 			/**
 			* Sets the exposure for the camera. The exposure value can be passed to a shader for HDR rendering.
 			* @param level The new exposure value.
 			*/						
-			void setExposureLevel(Number level) {
-				exposureLevel = level;
-			}
+			void setExposureLevel(Number level);
 			
 			/**
 			* Returns the camera's exposure value.
 			* @return Current exposure value.
 			*/									
-			Number getExposureLevel() {
-				return exposureLevel;
-			}
+			Number getExposureLevel();
 
 			/**
 			* Sets the post-processing shader for the camera.
@@ -186,55 +152,27 @@ namespace Polycode {
 			*/			
 			Material *getScreenShaderMaterial() { return filterShaderMaterial; }	
 			
-        
-            virtual Entity *Clone(bool deepClone, bool ignoreEditorOnly) const;
-            virtual void applyClone(Entity *clone, bool deepClone, bool ignoreEditorOnly) const;
-			
-			Matrix4 getProjectionMatrix();
-			
-			Polycode::Rectangle getViewport();
-			
 			/**
 			* Toggles the frustum culling of the camera. (Defaults to true).
 			*/
 			bool frustumCulling;
-			
-			bool topLeftOrtho;
 		
-            /**
-            * Shifts camera frustum by factor of the frustum size. (x=-1 will shift the frustum to the left by a whole screen width).
-            */
+			/**
+			* Shifts camera frustum by factor of the frustum size. (x=-1 will shift the frustum to the left by a whole screen width).
+			*/
 			Vector2 cameraShift;
-		      
-			/** @deprecated use setProjectionMode(ProjectionMode mode) */
-			void setOrthoSizeMode(int orthoSizeMode) { setProjectionMode(orthoSizeMode); }
-			/** @deprecated use getProjectionMode() */
-			int getOrthoSizeMode() const { return projectionMode; }
-
-			void setProjectionMode(int mode);
-			int getProjectionMode() const { return projectionMode; }
-
-
+					
 		protected:
-
-			int projectionMode;
-
+		
 			Matrix4 projectionMatrix;
-
-			Polycode::Rectangle viewport;
+					
 			Number orthoSizeX;
 			Number orthoSizeY;
-
-			Number nearClipPlane;
-			Number farClipPlane;
-								
+					
 			Number exposureLevel;
+			bool orthoMode;
 			Number fov;
-
-			Number leftFrustum,rightFrustum,topFrustum,bottomFrustum;
-
-			Vector4 frustumPlanes[6];
-
+			Number frustumPlanes[6][4];
 			Scene *parentScene;
 
 			Material *filterShaderMaterial;			

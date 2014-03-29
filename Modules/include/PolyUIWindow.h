@@ -23,19 +23,19 @@
 #pragma once
 
 #include "PolyGlobals.h"
-#include "PolyScenePrimitive.h"
-#include "PolySceneLabel.h"
-#include "PolyUIElement.h"
+#include "PolyScreenShape.h"
+#include "PolyScreenLabel.h"
+#include "PolyScreenEntity.h"
 #include "PolyUIEvent.h"
 #include "PolyUIImageButton.h"
 #include "PolyFont.h"
-#include "PolyInputKeys.h"
+#include "PolyScreenEvent.h"
 #include "PolyUIBox.h"
 #include "PolyTween.h"
 
 namespace Polycode {
 
-	class _PolyExport UIWindow : public UIElement {
+	class _PolyExport UIWindow : public ScreenEntity {
 		public:
 			UIWindow(String windowName, Number width, Number height);
 			virtual ~UIWindow();
@@ -43,7 +43,7 @@ namespace Polycode {
 			void showWindow();
 			void hideWindow();
 			void onKeyDown(PolyKEY key, wchar_t charCode);
-			virtual void onClose();
+			virtual void onClose(){}
 			void onLoseFocus();
 			
 			void setWindowSize(Number w, Number h);
@@ -64,12 +64,15 @@ namespace Polycode {
 			Number closeIconX;
 			Number closeIconY;
 			
-			SceneLabel *titleLabel;
+			ScreenLabel *titleLabel;
 		
 			Font *font;
+			Tween *windowTween;
 			UIImageButton *closeBtn;
 			UIBox *windowRect;
-			Entity *titlebarRect;
+			ScreenShape *titlebarRect;
+		
+			bool tweenClosing;
 			void resetTween();
 	};
 }

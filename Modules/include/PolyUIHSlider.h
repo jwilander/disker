@@ -22,9 +22,9 @@
 
 #pragma once
 #include "PolyGlobals.h"
-#include "PolySceneLabel.h"
-#include "PolyScenePrimitive.h"
-#include "PolyEntity.h"
+#include "PolyScreenLabel.h"
+#include "PolyScreenShape.h"
+#include "PolyScreenEntity.h"
 #include "PolyUIEvent.h"
 #include "PolyUIBox.h"
 #include "PolyUIElement.h"
@@ -36,7 +36,7 @@ namespace Polycode {
 	class _PolyExport UIHSlider : public UIElement {
 		public:
 			UIHSlider(Number start, Number end, Number width);
-			virtual ~UIHSlider();		
+			~UIHSlider();		
 			void handleEvent(Event *event);
 			void Update();
 			
@@ -58,15 +58,13 @@ namespace Polycode {
 			Number bgHeight;
 			
 			UIBox *bgRect;
-			UIImage *gripRect;
-        
-            Number sidePadding;
+			ScreenImage *gripRect;
 			
 			Number sliderValue;
 			Number startValue;
 			Number endValue;
 			Number sliderWidth;
 			
-			Entity *bgHitBox;
+			ScreenShape *bgHitBox;
 	};
 }

@@ -4,13 +4,15 @@ const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
 
 DiskerApp::DiskerApp(PolycodeView *view) {
-    core = new POLYCODE_CORE(view, SCREEN_WIDTH, SCREEN_HEIGHT, false, true, 0, 0, 90, 0, true);
+    core = new POLYCODE_CORE(view, SCREEN_WIDTH, SCREEN_HEIGHT, false, true, 1, 10, 90, 0);
+
 	CoreServices::getInstance()->getResourceManager()->addArchive("../Resources/default.pak");
 	CoreServices::getInstance()->getResourceManager()->addDirResource("default");
     
-    scene = new PhysicsScene2D(0.1, 60);
+    scene = new PhysicsScreen(0.1, 60);
     scene->setGravity(Vector2(0.0f,0.0f));
-    scene->getActiveCamera()->setOrthoSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+    scene->setScreenOffset(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+    //scene->getActiveCamera()->setOrthoSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     
     player = new Player(scene);
     
@@ -21,7 +23,7 @@ DiskerApp::DiskerApp(PolycodeView *view) {
     core->getInput()->addEventListener(inputHandler, InputEvent::EVENT_KEYUP);
     
     collisionHandler = new CollisionHandler(scene, player);
-    scene->addEventListener(collisionHandler, PhysicsScene2DEvent::EVENT_NEW_SHAPE_COLLISION);
+    scene->addEventListener(collisionHandler, PhysicsScreenEvent::EVENT_NEW_SHAPE_COLLISION);
 }
 
 bool DiskerApp::Update() {

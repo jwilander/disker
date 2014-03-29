@@ -23,10 +23,10 @@
 #pragma once
 #include "PolyGlobals.h"
 #include "PolyUIElement.h"
-#include "PolySceneLabel.h"
-#include "PolySceneImage.h"
-#include "PolyScenePrimitive.h"
-#include "PolyEntity.h"
+#include "PolyScreenLabel.h"
+#include "PolyScreenImage.h"
+#include "PolyScreenShape.h"
+#include "PolyScreenEntity.h"
 #include "PolyUITreeEvent.h"
 #include "PolyUIBox.h"
 #include "PolyTween.h"
@@ -41,7 +41,7 @@ namespace Polycode {
 			using UIElement::Resize;
 
 			UITree(String icon, String text, Number treeWidth, Number treeOffset=0);
-			virtual ~UITree();
+			~UITree();
 			
 			
 			void handleEvent(Event *event);
@@ -93,14 +93,15 @@ namespace Polycode {
 			UITree *parent;
 			Number padding;
 			UIBox *selection;
-			Entity *bgBox;
-			SceneLabel *textLabel;
-			UIImage *iconImage;
+		//	UIBox *bgBox;
+			ScreenShape *bgBox;
+			ScreenLabel *textLabel;
+			ScreenImage *iconImage;
 			bool selected;
 			Number treeHeight;
 			vector<UITree*> treeChildren;
 			bool collapsed;
-			UIImage *arrowIconImage;
+			ScreenImage *arrowIconImage;
 			String arrowIcon;
 			Vector2 mouseDownPosition;
 			String fontName;

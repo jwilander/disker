@@ -13,12 +13,11 @@ Player::Player(PhysicsScreen *scene)
     health = MAX_PLAYER_HEALTH;
     direction = START_PLAYER_DIRECTION;
     state = ALIVE;
-    
     // TODO - figure out relative path
-    sprite = new SceneSprite("/usr/local/joram/disker/Resources/playerSprite.png", PLAYER_WIDTH, PLAYER_HEIGHT);
+    sprite = new ScreenSprite("/usr/local/joram/disker/Resources/playerSprite.png", PLAYER_WIDTH, PLAYER_HEIGHT);
     sprite->custEntityType = ENTITY_PLAYER;
     sprite->setUserData(this);
-    scene->addCollisionChild(sprite, PhysicsScene2DEntity::ENTITY_CIRCLE);
+    scene->addCollisionChild(sprite, PhysicsScreenEntity::ENTITY_CIRCLE);
     
     playerMovement = new PlayerMovement(this, scene);
     playerDeath = new PlayerDeath(this, scene);

@@ -19,10 +19,10 @@ void CollisionHandler::handleEvent(Event *e)
     /* only accept events sent from the right place */
     if (e->getDispatcher() == scene)
     {
-        PhysicsScene2DEvent *pe = (PhysicsScene2DEvent*) e;
+        PhysicsScreenEvent *pe = (PhysicsScreenEvent*) e;
         switch (pe->getEventCode())
         {
-            case PhysicsScene2DEvent::EVENT_NEW_SHAPE_COLLISION:
+            case PhysicsScreenEvent::EVENT_NEW_SHAPE_COLLISION:
                 HandleCollisionStart(pe);
                 break;                
             default:
@@ -31,7 +31,7 @@ void CollisionHandler::handleEvent(Event *e)
     }
 }
 
-void CollisionHandler::HandleCollisionStart(PhysicsScene2DEvent *pe)
+void CollisionHandler::HandleCollisionStart(PhysicsScreenEvent *pe)
 {
     String entityType1 = pe->entity1->custEntityType;
     String entityType2 = pe->entity2->custEntityType;

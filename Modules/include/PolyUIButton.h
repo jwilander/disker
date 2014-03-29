@@ -22,9 +22,9 @@
 
 #pragma once
 #include "PolyGlobals.h"
-#include "PolySceneLabel.h"
-#include "PolyScenePrimitive.h"
-#include "PolyEntity.h"
+#include "PolyScreenLabel.h"
+#include "PolyScreenShape.h"
+#include "PolyScreenEntity.h"
 #include "PolyUIEvent.h"
 #include "PolyUIBox.h"
 #include "PolyUIElement.h"
@@ -35,11 +35,10 @@ namespace Polycode {
 	class _PolyExport UIButton : public UIElement {
 		public:
 			UIButton(String text, Number width, Number height = 23);
-			virtual ~UIButton();
+			~UIButton();
 			void Resize(Number width, Number height);		
 			void handleEvent(Event *event);
-            void setCaption(String caption);
-        
+			
 			void Update();
 				
 		private:
@@ -52,7 +51,7 @@ namespace Polycode {
 			Number labelYPos;
 			UIBox *buttonRect;
 			UIBox *buttonFocusedRect;		
-			SceneLabel *buttonLabel;
+			ScreenLabel *buttonLabel;
 			bool pressedDown;
 	};
 }

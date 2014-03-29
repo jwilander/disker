@@ -23,6 +23,7 @@ THE SOFTWARE.
 #pragma once
 #include "PolyGlobals.h"
 #include "PolyVertex.h"
+#include "PolyPolygon.h"
 
 class OSFILE;
 
@@ -110,7 +111,7 @@ namespace Polycode {
 	} Vector2_struct;
 	
 	/**
-	*  A mesh comprised of vertices. When data in the mesh changes, arrayDirtyMap must be set to true for the appropriate array types (color, position, normal, etc). Available types are defined in RenderDataArray.
+	* A polygonal mesh. The mesh is assembled from Polygon instances, which in turn contain Vertex instances. This structure is provided for convenience and when the mesh is rendered, it is cached into vertex arrays with no notions of separate polygons. When data in the mesh changes, arrayDirtyMap must be set to true for the appropriate array types (color, position, normal, etc). Available types are defined in RenderDataArray.
 	*/
 	class _PolyExport Mesh : public PolyBase {
 		public:
@@ -137,6 +138,12 @@ namespace Polycode {
 			virtual ~Mesh();
 			
 			/**
+			* Adds a polygon to the mesh.
+			* @param newPolygon Polygon to add.
+			*/
+			void addPolygon(Polygon *newPolygon);
+
+			/**
 			* Loads a mesh from a file.
 			* @param fileName Path to mesh file.
 			*/			
@@ -152,11 +159,16 @@ namespace Polycode {
 			* Saves mesh to a file.
 			* @param fileName Path to file to save to.
 			*/			
-			void saveToFile(const String& fileName, bool writeNormals = true, bool writeTangents = true, bool writeColors = true, bool writeBoneWeights = true, bool writeUVs = true, bool writeSecondaryUVs = false);
+			void saveToFile(const String& fileName);
 
 			void loadFromFile(OSFILE *inFile);
-			void saveToFile(OSFILE *outFile, bool writeNormals = true, bool writeTangents = true, bool writeColors = true, bool writeBoneWeights = true, bool writeUVs = true, bool writeSecondaryUVs = false);
+			void saveToFile(OSFILE *outFile);
 			
+			/**
+			* Returns the number of polygons in the mesh.
+			* @return Number of polygons in the mesh.
+			*/						
+			unsigned int getPolygonCount();
 			
 			/**
 			* Returns the total vertex count in the mesh.
@@ -164,6 +176,12 @@ namespace Polycode {
 			*/
 			unsigned int getVertexCount();
 			
+			/**
+			* Returns a polygon at specified index.
+			* @param index Index of polygon.
+			* @return Polygon at index.
+			*/									
+			Polygon *getPolygon(unsigned int index);
 					
 			/**
 			* Creates a plane mesh of specified size.
@@ -180,29 +198,13 @@ namespace Polycode {
 			void createVPlane(Number w, Number h);
 
 			/**
-			* Creates a 2D circle.
-			* @param w Width of circle.
-			* @param h Height of plane.			
-			* @param numSegments Number of segments 			
-			*/ 
-			void createCircle(Number w, Number h, unsigned int numSegments);
-
-            /**
-             * Creates a 2D circle with normals pointing outwards from vertices.
-             * @param w Width of circle.
-             * @param h Height of plane.
-             * @param numSegments Number of segments
-             */
-            void createLineCircle(Number w, Number h, unsigned int numSegments);
-
-			/**
 			* Creates a torus.
 			* @param radius Radius of the torus.
 			* @param tubeRadius Radious of the tube.
 			* @param rSegments Number of radial segments.
 			* @param tSegments Number of tube segments.
 			*/ 	
-			void createTorus(Number radius, Number tubeRadius, int segmentsW, int segmentsH);
+			void createTorus(Number radius, Number tubeRadius, int rSegments, int tSegments);
 			
 			/**
 			* Creates a cube mesh of specified size.
@@ -243,19 +245,12 @@ namespace Polycode {
 			*/
 			Vector3 recenterMesh();
 		
-            Vertex *addVertex(Number x, Number y, Number z, Number u, Number v);
-        
-            Vertex *addVertex(Number x, Number y, Number z);
+			/**
+			* Toggles the mesh between using vertex or polygon normals. 
+			* @param val If true, the mesh will use vertex normals, otherwise it will use the polygon normals.
+			*/
+			void useVertexNormals(bool val);
 			
-            void addVertex(Vertex *vertex);
-        
-            Vertex *getVertex(unsigned int index) const;
-
-            Vertex *getActualVertex(unsigned int index) const;
-
-            unsigned int getActualVertexCount() const;
-        
-        
 			/**
 			* Sets the vertex buffer for the mesh.
 			* @param buffer New vertex buffer for mesh.
@@ -266,10 +261,7 @@ namespace Polycode {
 			* Returns the vertex buffer for the mesh.
 			* @return The vertex buffer for this mesh.
 			*/
-			VertexBuffer *getVertexBuffer();
-        
-        
-            Mesh *Copy() const;
+			VertexBuffer *getVertexBuffer();		
 			
 			/**
 			* Returns the radius of the mesh (furthest vertex away from origin).
@@ -282,12 +274,14 @@ namespace Polycode {
 			* @param smooth If true, will use smooth normals.
 			* @param smoothAngle If smooth, this parameter sets the angle tolerance for the approximation function.
 			*/
-			void calculateNormals(bool generateFaceNormals = false);
+			void calculateNormals(bool smooth=true, Number smoothAngle=90.0);	
 
 			/**
 			* Recalculates the tangent space vector for all vertices.
 			*/ 
 			void calculateTangents();
+			
+			std::vector<Polygon*> getConnectedFaces(Vertex *v);
 			
 			/**
 			* Returns the mesh type.
@@ -303,9 +297,6 @@ namespace Polycode {
 			void dirtyArray(unsigned int arrayIndex);
 			void dirtyArrays();
 
-            void setUseFaceNormals(bool val);
-            bool getUseFaceNormals();
-        
 			/**
 			* Calculates the mesh bounding box.
 			*/
@@ -369,29 +360,13 @@ namespace Polycode {
 			* If set to true, the renderer will use the vertex colors instead of entity color transform to render this mesh.
 			*/
 			bool useVertexColors;
-            bool indexedMesh;
-
-            void addIndexedFace(unsigned int i1, unsigned int i2);
-            void addIndexedFace(unsigned int i1, unsigned int i2, unsigned int i3);
-            void addIndexedFace(unsigned int i1, unsigned int i2, unsigned int i3, unsigned int i4);
-            void addIndex(unsigned int index);
-        
-            Vector3 getFaceNormalForVertex(unsigned int index);
-        
-            void addFaceNormal(Vector3 faceNormal);
-        
+			
+		
 		protected:
-        
-            Vector3 calculateFaceTangent(Vertex *v1, Vertex *v2, Vertex *v3);
-        
-            bool useFaceNormals;
-        
-            VertexBuffer *vertexBuffer;
-            bool meshHasVertexBuffer;
-            int meshType;
-        
-            std::vector<Vector3> faceNormals;
-            std::vector<unsigned int> indices;
-            std::vector <Vertex*> vertices;
+					
+		VertexBuffer *vertexBuffer;
+		bool meshHasVertexBuffer;
+		int meshType;
+		std::vector <Polygon*> polygons;
 	};
 }

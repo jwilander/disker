@@ -32,8 +32,8 @@ class btCollisionWorld;
 
 namespace Polycode {
 
-class Entity;
-class CollisionEntity;
+class SceneEntity;
+class CollisionSceneEntity;
 
 /**
 * Result of a collision test.
@@ -66,7 +66,7 @@ struct CollisionResult {
 		/**
 		* Entity returned.
 		*/
-		Entity *entity;
+		SceneEntity *entity;
 		
 		/**
 		* Ray normal
@@ -94,9 +94,9 @@ struct CollisionResult {
 		
 			virtual void Update();
 			
-			virtual void removeEntity(Entity *entity);
+			virtual void removeEntity(SceneEntity *entity);
 						
-			CollisionEntity *getCollisionEntityByObject(btCollisionObject *collisionObject);		
+			CollisionSceneEntity *getCollisionEntityByObject(btCollisionObject *collisionObject);		
 
 			
 			/** @name Collision scene
@@ -105,23 +105,23 @@ struct CollisionResult {
 			//@{			
 			
 			RayTestResult getFirstEntityInRay(const Vector3 &origin,  const Vector3 &dest);			
-			void enableCollision(Entity *entity, bool val);											
-			CollisionEntity *getCollisionByScreenEntity(Entity *ent);
-			CollisionResult testCollision(Entity *ent1, Entity *ent2);
-			CollisionResult testCollisionOnCollisionChild(CollisionEntity *cEnt1, CollisionEntity *cEnt2);				
-			CollisionResult testCollisionOnCollisionChild_Convex(CollisionEntity *cEnt1, CollisionEntity *cEnt2);	
+			void enableCollision(SceneEntity *entity, bool val);											
+			CollisionSceneEntity *getCollisionByScreenEntity(SceneEntity *ent);
+			CollisionResult testCollision(SceneEntity *ent1, SceneEntity *ent2);
+			CollisionResult testCollisionOnCollisionChild(CollisionSceneEntity *cEnt1, CollisionSceneEntity *cEnt2);				
+			CollisionResult testCollisionOnCollisionChild_Convex(CollisionSceneEntity *cEnt1, CollisionSceneEntity *cEnt2);	
 		
-			virtual CollisionEntity *addCollisionChild(Entity *newEntity, int type=0, int group=1);
-			CollisionEntity *trackCollision(Entity *newEntity, int type=0, int group=1);
-			void removeCollision(Entity *entity);
-			void adjustForCollision(CollisionEntity *collisionEntity);
+			virtual CollisionSceneEntity *addCollisionChild(SceneEntity *newEntity, int type=0, int group=1);
+			CollisionSceneEntity *trackCollision(SceneEntity *newEntity, int type=0, int group=1);
+			void removeCollision(SceneEntity *entity);
+			void adjustForCollision(CollisionSceneEntity *collisionEntity);
 			
 			//@}
 			// ----------------------------------------------------------------------------------------------------------------
 			
 		protected:
 		
-			std::vector<CollisionEntity*> collisionChildren;
+			std::vector<CollisionSceneEntity*> collisionChildren;
 			btCollisionWorld *world;
 			
 			btDefaultCollisionConfiguration *collisionConfiguration;

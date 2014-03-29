@@ -15,6 +15,8 @@
 		6D2800F913760E7C00BD8D0D /* PolycodeView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D2800F813760E7C00BD8D0D /* PolycodeView.mm */; };
 		6D2800FC13760F2C00BD8D0D /* DiskerApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D2800FA13760F2C00BD8D0D /* DiskerApp.cpp */; };
 		6D2800FE13760FC400BD8D0D /* default.pak in Resources */ = {isa = PBXBuildFile; fileRef = 6D2800FD13760FC400BD8D0D /* default.pak */; };
+		8410E5BB18E73E6F003FB1E8 /* libPolycore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8410E5BA18E73E6F003FB1E8 /* libPolycore.a */; };
+		8410E5BD18E73E7F003FB1E8 /* libPolycode2DPhysics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8410E5BC18E73E7F003FB1E8 /* libPolycode2DPhysics.a */; };
 		84438B8F18E5328200D1C6A6 /* Boundary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84438B8D18E5328200D1C6A6 /* Boundary.cpp */; };
 		84836A3E18E52ACA0088AEBA /* InputHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84836A3818E52ACA0088AEBA /* InputHandler.cpp */; };
 		84836A3F18E52ACA0088AEBA /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84836A3A18E52ACA0088AEBA /* Player.cpp */; };
@@ -24,7 +26,6 @@
 		84836A5018E52D230088AEBA /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 84836A4A18E52D230088AEBA /* Credits.rtf */; };
 		84836A5118E52D230088AEBA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84836A4C18E52D230088AEBA /* InfoPlist.strings */; };
 		84836A5218E52D230088AEBA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84836A4E18E52D230088AEBA /* MainMenu.xib */; };
-		84836A5418E52D620088AEBA /* libPolycore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84836A5318E52D620088AEBA /* libPolycore.a */; };
 		84836A5D18E52D860088AEBA /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84836A5518E52D860088AEBA /* libfreetype.a */; };
 		84836A5E18E52D860088AEBA /* liblibogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84836A5618E52D860088AEBA /* liblibogg.a */; };
 		84836A5F18E52D860088AEBA /* liblibvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84836A5718E52D860088AEBA /* liblibvorbis.a */; };
@@ -33,7 +34,6 @@
 		84836A6218E52D860088AEBA /* libphysfs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84836A5A18E52D860088AEBA /* libphysfs.a */; };
 		84836A6318E52D860088AEBA /* libpng15.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84836A5B18E52D860088AEBA /* libpng15.a */; };
 		84836A6418E52D860088AEBA /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84836A5C18E52D860088AEBA /* libz.a */; };
-		84836A6818E52D9D0088AEBA /* libPolycode2DPhysics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84836A6518E52D9D0088AEBA /* libPolycode2DPhysics.a */; };
 		84836A6918E52D9D0088AEBA /* libPolycodeTUIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84836A6618E52D9D0088AEBA /* libPolycodeTUIO.a */; };
 		84836A6A18E52D9D0088AEBA /* libPolycodeUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84836A6718E52D9D0088AEBA /* libPolycodeUI.a */; };
 		84836A7418E52DBA0088AEBA /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84836A6B18E52DBA0088AEBA /* libBox2D.a */; };
@@ -64,6 +64,8 @@
 		6D2800FA13760F2C00BD8D0D /* DiskerApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = DiskerApp.cpp; path = Disker/DiskerApp.cpp; sourceTree = "<group>"; };
 		6D2800FB13760F2C00BD8D0D /* DiskerApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiskerApp.h; path = Disker/DiskerApp.h; sourceTree = "<group>"; };
 		6D2800FD13760FC400BD8D0D /* default.pak */ = {isa = PBXFileReference; lastKnownFileType = file; name = default.pak; path = ../Resources/default.pak; sourceTree = "<group>"; };
+		8410E5BA18E73E6F003FB1E8 /* libPolycore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPolycore.a; path = Core/lib/libPolycore.a; sourceTree = "<group>"; };
+		8410E5BC18E73E7F003FB1E8 /* libPolycode2DPhysics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPolycode2DPhysics.a; path = Modules/lib/libPolycode2DPhysics.a; sourceTree = "<group>"; };
 		84438B8D18E5328200D1C6A6 /* Boundary.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = Boundary.cpp; sourceTree = "<group>"; };
 		84438B8E18E5328200D1C6A6 /* Boundary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boundary.h; sourceTree = "<group>"; };
 		84836A3818E52ACA0088AEBA /* InputHandler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = InputHandler.cpp; sourceTree = "<group>"; };
@@ -80,7 +82,6 @@
 		84836A4B18E52D230088AEBA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		84836A4D18E52D230088AEBA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		84836A4F18E52D230088AEBA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		84836A5318E52D620088AEBA /* libPolycore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPolycore.a; path = Core/lib/libPolycore.a; sourceTree = "<group>"; };
 		84836A5518E52D860088AEBA /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = Core/Dependencies/lib/libfreetype.a; sourceTree = "<group>"; };
 		84836A5618E52D860088AEBA /* liblibogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibogg.a; path = Core/Dependencies/lib/liblibogg.a; sourceTree = "<group>"; };
 		84836A5718E52D860088AEBA /* liblibvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibvorbis.a; path = Core/Dependencies/lib/liblibvorbis.a; sourceTree = "<group>"; };
@@ -89,7 +90,6 @@
 		84836A5A18E52D860088AEBA /* libphysfs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libphysfs.a; path = Core/Dependencies/lib/libphysfs.a; sourceTree = "<group>"; };
 		84836A5B18E52D860088AEBA /* libpng15.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng15.a; path = Core/Dependencies/lib/libpng15.a; sourceTree = "<group>"; };
 		84836A5C18E52D860088AEBA /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = Core/Dependencies/lib/libz.a; sourceTree = "<group>"; };
-		84836A6518E52D9D0088AEBA /* libPolycode2DPhysics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPolycode2DPhysics.a; path = Modules/lib/libPolycode2DPhysics.a; sourceTree = "<group>"; };
 		84836A6618E52D9D0088AEBA /* libPolycodeTUIO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPolycodeTUIO.a; path = Modules/lib/libPolycodeTUIO.a; sourceTree = "<group>"; };
 		84836A6718E52D9D0088AEBA /* libPolycodeUI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPolycodeUI.a; path = Modules/lib/libPolycodeUI.a; sourceTree = "<group>"; };
 		84836A6B18E52DBA0088AEBA /* libBox2D.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBox2D.a; path = Modules/Dependencies/lib/libBox2D.a; sourceTree = "<group>"; };
@@ -112,6 +112,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8410E5BD18E73E7F003FB1E8 /* libPolycode2DPhysics.a in Frameworks */,
+				8410E5BB18E73E6F003FB1E8 /* libPolycore.a in Frameworks */,
 				84836A7418E52DBA0088AEBA /* libBox2D.a in Frameworks */,
 				84836A7518E52DBA0088AEBA /* libBulletCollision.a in Frameworks */,
 				84836A7618E52DBA0088AEBA /* libBulletDynamics.a in Frameworks */,
@@ -121,7 +123,6 @@
 				84836A7A18E52DBA0088AEBA /* libBulletSoftBodySolvers_OpenCL_Mini.a in Frameworks */,
 				84836A7B18E52DBA0088AEBA /* libLinearMath.a in Frameworks */,
 				84836A7C18E52DBA0088AEBA /* libMiniCL.a in Frameworks */,
-				84836A6818E52D9D0088AEBA /* libPolycode2DPhysics.a in Frameworks */,
 				84836A6918E52D9D0088AEBA /* libPolycodeTUIO.a in Frameworks */,
 				84836A6A18E52D9D0088AEBA /* libPolycodeUI.a in Frameworks */,
 				84836A5D18E52D860088AEBA /* libfreetype.a in Frameworks */,
@@ -132,7 +133,6 @@
 				84836A6218E52D860088AEBA /* libphysfs.a in Frameworks */,
 				84836A6318E52D860088AEBA /* libpng15.a in Frameworks */,
 				84836A6418E52D860088AEBA /* libz.a in Frameworks */,
-				84836A5418E52D620088AEBA /* libPolycore.a in Frameworks */,
 				6D2800F613760DE400BD8D0D /* IOKit.framework in Frameworks */,
 				6D2800F413760DDA00BD8D0D /* OpenAL.framework in Frameworks */,
 				6D2800F213760DD500BD8D0D /* OpenGL.framework in Frameworks */,
@@ -164,6 +164,8 @@
 		6D2800BA13760D3E00BD8D0D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8410E5BC18E73E7F003FB1E8 /* libPolycode2DPhysics.a */,
+				8410E5BA18E73E6F003FB1E8 /* libPolycore.a */,
 				84836A6B18E52DBA0088AEBA /* libBox2D.a */,
 				84836A6C18E52DBA0088AEBA /* libBulletCollision.a */,
 				84836A6D18E52DBA0088AEBA /* libBulletDynamics.a */,
@@ -173,7 +175,6 @@
 				84836A7118E52DBA0088AEBA /* libBulletSoftBodySolvers_OpenCL_Mini.a */,
 				84836A7218E52DBA0088AEBA /* libLinearMath.a */,
 				84836A7318E52DBA0088AEBA /* libMiniCL.a */,
-				84836A6518E52D9D0088AEBA /* libPolycode2DPhysics.a */,
 				84836A6618E52D9D0088AEBA /* libPolycodeTUIO.a */,
 				84836A6718E52D9D0088AEBA /* libPolycodeUI.a */,
 				84836A5518E52D860088AEBA /* libfreetype.a */,
@@ -184,7 +185,6 @@
 				84836A5A18E52D860088AEBA /* libphysfs.a */,
 				84836A5B18E52D860088AEBA /* libpng15.a */,
 				84836A5C18E52D860088AEBA /* libz.a */,
-				84836A5318E52D620088AEBA /* libPolycore.a */,
 				6D2800F513760DE400BD8D0D /* IOKit.framework */,
 				6D2800F313760DDA00BD8D0D /* OpenAL.framework */,
 				6D2800F113760DD500BD8D0D /* OpenGL.framework */,
@@ -439,6 +439,8 @@
 					"$(SRCROOT)/Modules/lib",
 					/usr/local/joram/disker/Core/lib,
 					/usr/local/joram/disker/Modules/Dependencies/lib,
+					"$(PROJECT_DIR)/Core/lib",
+					"$(PROJECT_DIR)/Modules/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = Disker;
@@ -476,6 +478,8 @@
 					"$(SRCROOT)/Modules/lib",
 					/usr/local/joram/disker/Core/lib,
 					/usr/local/joram/disker/Modules/Dependencies/lib,
+					"$(PROJECT_DIR)/Core/lib",
+					"$(PROJECT_DIR)/Modules/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = Disker;

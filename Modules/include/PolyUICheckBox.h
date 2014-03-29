@@ -22,10 +22,10 @@
 
 #pragma once
 #include "PolyGlobals.h"
-#include "PolySceneImage.h"
-#include "PolySceneLabel.h"
-#include "PolyScenePrimitive.h"
-#include "PolyEntity.h"
+#include "PolyScreenImage.h"
+#include "PolyScreenLabel.h"
+#include "PolyScreenShape.h"
+#include "PolyScreenEntity.h"
 #include "PolyUIEvent.h"
 #include "PolyFont.h"
 #include "PolyUIElement.h"
@@ -35,7 +35,7 @@ namespace Polycode {
 	class _PolyExport UICheckBox : public UIElement {
 		public:
 			UICheckBox(String caption, bool checked);
-			virtual ~UICheckBox();
+			~UICheckBox();
 		
 			void setChecked(bool val);
 			void changeCheck();
@@ -45,8 +45,8 @@ namespace Polycode {
 			
 		private:
 			bool checked;
-			UILabel *captionLabel;
-			UIImage *buttonImageChecked;
-			UIImage *buttonImageUnchecked;			
+			ScreenLabel *captionLabel;
+			ScreenImage *buttonImageChecked;
+			ScreenImage *buttonImageUnchecked;			
 	};
 }

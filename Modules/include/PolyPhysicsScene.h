@@ -35,8 +35,8 @@ class btGeneric6DofConstraint;
 
 namespace Polycode {
 
-	class Entity;
-	class PhysicsEntity;
+	class SceneEntity;
+	class PhysicsSceneEntity;
 	class PhysicsCharacter;
 	class PhysicsVehicle;
 	
@@ -48,8 +48,8 @@ namespace Polycode {
 			static const int EVENTBASE_PHYSICSSCENEEVENT = 0x900;
 			static const int COLLISION_EVENT = EVENTBASE_PHYSICSSCENEEVENT+0;
 			
-			PhysicsEntity *entityA;
-			PhysicsEntity *entityB;
+			PhysicsSceneEntity *entityA;
+			PhysicsSceneEntity *entityB;
 
 			Number appliedImpulse;
 						
@@ -92,50 +92,46 @@ namespace Polycode {
 		
 		void Update();		
 		
-		void removeEntity(Entity *entity);
+		void removeEntity(SceneEntity *entity);
 		
 		void processWorldCollisions();
 		
-		PhysicsEntity *getPhysicsEntityByCollisionObject(btCollisionObject *object);
+		PhysicsSceneEntity *getPhysicsEntityByCollisionObject(btCollisionObject *object);
 		
 			/** @name Physics scene
 			*  Public methods
 			*/
 			//@{			
 		
-		void removePhysicsChild(Entity *entity);
-		PhysicsEntity *getPhysicsEntityByEntity(Entity *entity);
+		void removePhysicsChild(SceneEntity *entity);
+		PhysicsSceneEntity *getPhysicsEntityBySceneEntity(SceneEntity *entity);
 		
-		PhysicsEntity *addPhysicsChild(Entity *newEntity, int type=0, Number mass = 0.0f, Number friction=1, Number restitution=0, int group=1, bool compoundChildren = false);		
-		PhysicsEntity *trackPhysicsChild(Entity *newEntity, int type=0, Number mass = 0.0f, Number friction=1, Number restitution=0, int group=1, bool compoundChildren = false);		
+		PhysicsSceneEntity *addPhysicsChild(SceneEntity *newEntity, int type=0, Number mass = 0.0f, Number friction=1, Number restitution=0, int group=1, bool compoundChildren = false);		
+		PhysicsSceneEntity *trackPhysicsChild(SceneEntity *newEntity, int type=0, Number mass = 0.0f, Number friction=1, Number restitution=0, int group=1, bool compoundChildren = false);		
 		
-		PhysicsCharacter *addCharacterChild(Entity *newEntity, Number mass, Number friction, Number stepSize, int group  = 1);
-		PhysicsCharacter *trackCharacterChild(Entity *newEntity, Number mass, Number friction, Number stepSize, int group  = 1);
-        
+		PhysicsCharacter *addCharacterChild(SceneEntity *newEntity, Number mass, Number friction, Number stepSize, int group  = 1);
 		void removeCharacterChild(PhysicsCharacter *character);
 		
-		PhysicsHingeConstraint *createHingeConstraint(Entity *entity, Vector3 pivot, Vector3 axis, Number minLimit, Number maxLimit);
+		PhysicsHingeConstraint *createHingeConstraint(SceneEntity *entity, Vector3 pivot, Vector3 axis, Number minLimit, Number maxLimit);
 
-		PhysicsHingeConstraint *createHingeJoint(Entity *entity1, Entity *entity2, Vector3 pivot1, Vector3 axis1, Vector3 pivot2, Vector3 axis2, Number minLimit, Number maxLimit);
+		PhysicsHingeConstraint *createHingeJoint(SceneEntity *entity1, SceneEntity *entity2, Vector3 pivot1, Vector3 axis1, Vector3 pivot2, Vector3 axis2, Number minLimit, Number maxLimit);
 		
-		PhysicsGenericConstraint *createGenericConstraint(Entity *entity);
+		PhysicsGenericConstraint *createGenericConstraint(SceneEntity *entity);
 				
-		void setVelocity(Entity *entity, Vector3 velocity);
-		void setSpin(Entity *entity, Vector3 spin);
+		void setVelocity(SceneEntity *entity, Vector3 velocity);
+		void setSpin(SceneEntity *entity, Vector3 spin);
 				
-		void warpEntity(Entity *entity, Vector3 position, bool resetRotation = false);
+		void warpEntity(SceneEntity *entity, Vector3 position, bool resetRotation = false);
 		
 		void removeConstraint(PhysicsHingeConstraint *constraint);
 		
-		void applyImpulse(Entity *entity, Vector3 force, Vector3 point);
+		void applyImpulse(SceneEntity *entity, Vector3 force, Vector3 point);
 		
-		PhysicsVehicle *addVehicleChild(Entity *newEntity, Number mass, Number friction, int group  = 1);
-
-		PhysicsVehicle *trackVehicleChild(Entity *newEntity, Number mass, Number friction, int group  = 1);
+		PhysicsVehicle *addVehicleChild(SceneEntity *newEntity, Number mass, Number friction, int group  = 1);
 		
 		void setGravity(Vector3 gravity);
 		
-		void wakeUp(Entity *entity);
+		void wakeUp(SceneEntity *entity);
 			//@}
 			// ----------------------------------------------------------------------------------------------------------------
 
@@ -152,7 +148,7 @@ namespace Polycode {
 		btDbvtBroadphase *broadphase;
 		btGhostPairCallback *ghostPairCallback;
 		
-		std::vector<PhysicsEntity*> physicsChildren;
+		std::vector<PhysicsSceneEntity*> physicsChildren;
 		
 	};
 	

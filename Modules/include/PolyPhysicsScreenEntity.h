@@ -27,25 +27,25 @@ THE SOFTWARE.
 
 namespace Polycode {
 
-	class Entity;
+	class ScreenEntity;
 
 	/**
 	* A 2D Physics enabled screen entity. 
 	*/	
-	class _PolyExport PhysicsScene2DEntity {
+	class _PolyExport PhysicsScreenEntity {
 		public:
         
-            PhysicsScene2DEntity() { collisionOnly = false; }
+            PhysicsScreenEntity() { collisionOnly = false; }
         
-			PhysicsScene2DEntity(Entity *entity, b2World *world, Number worldScale, int entType, bool isStatic, Number friction, Number density, Number restitution, bool isSensor, bool fixedRotation, int groupIndex = 0);
-			virtual ~PhysicsScene2DEntity();
+			PhysicsScreenEntity(ScreenEntity *entity, b2World *world, Number worldScale, int entType, bool isStatic, Number friction, Number density, Number restitution, bool isSensor, bool fixedRotation, int groupIndex = 0);
+			virtual ~PhysicsScreenEntity();
 
 			virtual void Update();
 			
 			/**
 			* Returns the screen entity associated with this physics entity.
 			*/
-			Entity *getEntity();
+			ScreenEntity *getScreenEntity();
 			
 			/**
 			* Applies torque to the physics entity		
@@ -148,9 +148,7 @@ namespace Polycode {
 		protected:
         
 			Number worldScale;        
-			Entity *entity;
+			ScreenEntity *screenEntity;   		
 	};
-	
-	typedef PhysicsScene2DEntity PhysicsScreenEntity;
 
 }

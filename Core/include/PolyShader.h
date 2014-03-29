@@ -26,7 +26,6 @@ THE SOFTWARE.
 #include "PolyColor.h"
 #include "PolyVector2.h"
 #include "PolyVector3.h"
-#include "PolyMatrix4.h"
 #include "PolyResource.h"
 #include <string.h>
 
@@ -50,17 +49,7 @@ namespace Polycode {
 	static const int PARAM_VECTOR3 = 3;
 	static const int PARAM_COLOR = 4;
 	static const int PARAM_MATRIX = 5;
-	};
-	
-	typedef struct {
-		Texture *texture;
-		String name;
-	} TextureBinding;
-    
-	typedef struct {
-		Cubemap *cubemap;
-		String name;
-	} CubemapBinding;
+	};	
 
 	class _PolyExport ShaderProgram : public Resource {
 		public:
@@ -87,7 +76,7 @@ namespace Polycode {
 			void setName(const String& name);
 			const String& getName() const;
 			
-			ShaderBinding *createBinding();
+			virtual ShaderBinding *createBinding() = 0;
 			virtual void reload() {}								
 			
 			int getExpectedParamType(String name);
@@ -99,7 +88,7 @@ namespace Polycode {
 			static const int MODULE_SHADER = 1;
 
 			int numSpotLights;
-			int numPointLights;
+			int numAreaLights;
 			
 			std::vector<String> expectedTextures;
 			std::vector<String> expectedCubemaps;			
@@ -135,30 +124,19 @@ namespace Polycode {
 	};
 	
 	class LocalShaderParam : public PolyBase {
-		public:
-        
-            LocalShaderParam();
-            ~LocalShaderParam();
-            LocalShaderParam *Copy();
-        
+		public:	
 			String name;
 			void *data;
-			int type;
-            bool ownsPointer;
 		
-            // Convenience getters/setters for Lua users
-            Number getNumber()         { return *((Number *)data); }
-            Vector2 getVector2()       { return *((Vector2 *)data); }
-            Vector3 getVector3()       { return *((Vector3 *)data); }
-            Matrix4 getMatrix4()       { return *((Matrix4 *)data); }
-            Color getColor()           { return *((Color *)data); }
-            void setNumber(Number x)   { memcpy(data, &x, sizeof(x)); }
-            void setVector2(Vector2 x) { memcpy(data, &x, sizeof(x)); }
-            void setVector3(Vector3 x) { memcpy(data, &x, sizeof(x)); }
-            void setMatrix4(Matrix4 x) { memcpy(data, &x, sizeof(x)); }
-            void setColor(Color x)     { static_cast<Color*>(data)->setColor(&x); }
-            
-            void setParamValueFromString(int type, String pvalue);
+		// Convenience getters/setters for Lua users
+		Number getNumber()         { return *((Number *)data); }
+		Vector2 getVector2()       { return *((Vector2 *)data); }
+		Vector3 getVector3()       { return *((Vector3 *)data); }
+		Color getColor()           { return *((Color *)data); }
+		void setNumber(Number x)   { memcpy(data, &x, sizeof(x)); }
+		void setVector2(Vector2 x) { memcpy(data, &x, sizeof(x)); }
+		void setVector3(Vector3 x) { memcpy(data, &x, sizeof(x)); }
+		void setColor(Color x)     { static_cast<Color*>(data)->setColor(&x); }
 	};	
 	
 	class RenderTargetBinding : public PolyBase {
@@ -177,18 +155,15 @@ namespace Polycode {
 		public:
 			ShaderBinding(Shader *shader);
 			virtual ~ShaderBinding();
-        
-            void copyTo(ShaderBinding *targetBinding);
 
-            Texture *getTexture(const String& name);
-            Cubemap *getCubemap(const String& name);
-			void clearTexture(const String& name);
-			void clearCubemap(const String& name);
-            void addTexture(const String& name, Texture *texture);
-            void addCubemap(const String& name, Cubemap *cubemap);
-        
+			virtual Texture *getTexture(const String& name){ return NULL;};
+			virtual Cubemap *getCubemap(const String& name){ return NULL;};			
+			virtual void clearTexture(const String& name){};
+			virtual void clearCubemap(const String& name){};
+			virtual void addTexture(const String& name, Texture *texture)  {};
 			LocalShaderParam *addParam(int type, const String& name);
-			LocalShaderParam *addParamPointer(int type, const String& name, void *ptr);        
+			virtual void addCubemap(const String& name, Cubemap *cubemap) {};
+		
 			unsigned int getNumLocalParams();
 			LocalShaderParam *getLocalParam(unsigned int index);
 			LocalShaderParam *getLocalParamByName(const String& name);
@@ -210,9 +185,8 @@ namespace Polycode {
 
 			unsigned int getNumOutTargetBindings();
 			RenderTargetBinding *getOutTargetBinding(unsigned int index);
-			            
-            std::vector<TextureBinding> textures;
-            std::vector<CubemapBinding> cubemaps;
+			
+			LocalShaderParam *addLocalParam(const String& name, void *ptr);
 		
 			Shader* shader;
 			std::vector<LocalShaderParam*> localParams;

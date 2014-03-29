@@ -54,7 +54,7 @@ namespace Polycode {
 			* Default constructor.
 			*/ 
 			Vector3();
-			virtual ~Vector3();
+			~Vector3();
 
 			/**
 			* Sets the vector from x,y,z coordinates.
@@ -88,11 +88,6 @@ namespace Polycode {
 				return Vector3(x * val, y * val, z * val);
 			}
 
-			inline Vector3 operator * (const Vector3 &v2) const {
-				return Vector3(x * v2.x, y * v2.y, z * v2.z);
-			}
-
-
 			inline Vector3 operator / (const Number val) const {
 				assert( val != 0.0 );
 				return operator*(1/val);
@@ -121,11 +116,8 @@ namespace Polycode {
 	
 			inline Vector3 operator + ( const Vector3& v2 ) const {
 				return Vector3(x + v2.x, y + v2.y, z + v2.z);
-			}
-        
-            inline Vector3 operator - () {
-                return Vector3(-x, -y, -z);
-            }
+			}		
+
 
 			inline bool operator == ( const Vector3& v2)  {
 				return (v2.x == x && v2.y == y && v2.z == z);
@@ -158,15 +150,6 @@ namespace Polycode {
 			*/
 			inline Number length () const {
 				return sqrtf( x * x + y * y + z * z );
-			}
-			
-			inline Vector3 setLength(const Number newLength) {
-				Number oldLength = length();
-				if(oldLength != 0 && newLength != oldLength) {
-					(*this) = (*this) * (newLength / oldLength);
-				}
-				return (*this);
-				
 			}
 			
 			/**

@@ -22,11 +22,11 @@
 
 #pragma once
 #include "PolyGlobals.h"
-#include "PolySceneLabel.h"
-#include "PolyScenePrimitive.h"
+#include "PolyScreenLabel.h"
+#include "PolyScreenShape.h"
 #include "PolyFontManager.h"
 #include "PolyFont.h"
-#include "PolyEntity.h"
+#include "PolyScreenEntity.h"
 #include "PolyUIEvent.h"
 #include "PolyUIBox.h"
 #include "PolyUIMenu.h"
@@ -147,7 +147,7 @@ namespace Polycode {
 			 * @param height The height of the element.
 			 */
 			UITextInput(bool multiLine, Number width, Number height);
-			virtual ~UITextInput();
+			~UITextInput();
 		
 			void handleEvent(Event *event);
 			void Update();
@@ -377,7 +377,7 @@ namespace Polycode {
 			
 			Number resizeTimer;
 
-			Entity *lineNumberAnchor;
+			ScreenEntity *lineNumberAnchor;
 		
 			void renumberLines();
 			bool isNumberOrCharacter(wchar_t charCode);			
@@ -427,9 +427,9 @@ namespace Polycode {
 			std::vector<TextColorPair> makeWordWrapBuffer(LineInfo *lineInfo, String indentPrefix);
 			std::vector<TextColorPair> splitTokens(String stringToSplit, LineColorInfo *stringColorInfo);
 			
-			UIRect *selectorRectTop;
-			UIRect *selectorRectMiddle;
-			UIRect *selectorRectBottom;		
+			ScreenShape *selectorRectTop;
+			ScreenShape *selectorRectMiddle;
+			ScreenShape *selectorRectBottom;		
 			int numLines;			
 			
 			Number padding;
@@ -440,8 +440,7 @@ namespace Polycode {
 			int selectionL;
 			int selectionR;
 			
-			UIRect *lineNumberBg;
-            Number textInputOffsetY;
+			ScreenShape *lineNumberBg;
 			
 			int decoratorOffset;
 		
@@ -471,12 +470,12 @@ namespace Polycode {
 			
 			UITextInputSyntaxHighlighter *syntaxHighliter;
 		
-			Entity *linesContainer;
+			ScreenEntity *linesContainer;
 
 			// container for the actual text contents
 			UIElement *textContainer; 
 			
-			vector<SceneLabel*> linesToDelete;	
+			vector<ScreenLabel*> linesToDelete;	
 			
 			std::vector<FindMatch> findMatches;
 			int findIndex;
@@ -489,7 +488,7 @@ namespace Polycode {
 			bool multiLine;
 			Timer *blinkTimer;
 			UIBox *inputRect;
-			UIRect *blinkerRect;
+			ScreenShape *blinkerRect;
 			Vector2 dragMouseStart;
 			
 			Color selectionColor;
@@ -522,8 +521,8 @@ namespace Polycode {
 			vector<LineInfo> lines;
 			vector<WordWrapLine> wordWrapLines;
 									
-			vector<SceneLabel*> bufferLines;
-			vector<SceneLabel*> numberLines;
+			vector<ScreenLabel*> bufferLines;
+			vector<ScreenLabel*> numberLines;
 			
 			Core *core;
 			

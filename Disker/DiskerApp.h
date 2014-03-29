@@ -18,7 +18,7 @@ public:
 private:
     // core objects
     Core *core;
-    PhysicsScene2D *scene;
+    PhysicsScreen *scene;
     
     // handlers and managers
     InputHandler *inputHandler;
@@ -27,6 +27,5 @@ private:
     // world objects
     Player *player;
     Boundary *boundary;
-    SceneSprite *image;
     
 };

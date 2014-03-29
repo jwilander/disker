@@ -24,7 +24,7 @@ private:
     PhysicsScreen *scene;
     Player *player;
     
-    void HandleCollisionStart(PhysicsScene2DEvent *pe);
+    void HandleCollisionStart(PhysicsScreenEvent *pe);
     
 };
 

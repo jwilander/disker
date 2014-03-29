@@ -22,9 +22,9 @@
 
 #pragma once
 #include "PolyGlobals.h"
-#include "PolySceneImage.h"
-#include "PolyScenePrimitive.h"
-#include "PolyEntity.h"
+#include "PolyScreenImage.h"
+#include "PolyScreenShape.h"
+#include "PolyScreenEntity.h"
 #include "PolyUIEvent.h"
 #include "PolyUIElement.h"
 
@@ -32,14 +32,14 @@ namespace Polycode {
 
 	class _PolyExport UIImageButton : public UIElement {
 		public:
-			UIImageButton(String imageName, Number scale=1.0, Number width = -1, Number height = -1);
-			virtual ~UIImageButton();
+			UIImageButton(String imageName);
+			~UIImageButton();
 		
 			void handleEvent(Event *event);
 				
 		private:
-			UIRect *buttonRect;
-			UIImage *buttonImage;
+			ScreenShape *buttonRect;
+			ScreenImage *buttonImage;
 			bool pressedDown;
 	};
 }

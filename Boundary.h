@@ -21,10 +21,10 @@ public:
     ~Boundary();
     
 private:
-    ScenePrimitive *topWall;
-    ScenePrimitive *leftWall;
-    ScenePrimitive *rightWall;
-    ScenePrimitive *bottomWall;
+    ScreenShape *topWall;
+    ScreenShape *leftWall;
+    ScreenShape *rightWall;
+    ScreenShape *bottomWall;
     
 };
 

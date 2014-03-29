@@ -50,7 +50,7 @@ namespace Polycode {
 		Tween(Number *target, int easeType, Number startVal, Number endVal, Number time, bool repeat=false, bool deleteOnComplete=false, Number waitTime = 0.0);
 		virtual ~Tween();
 		
-		void updateTween(Number elapsed);
+		void handleEvent(Event *event);
 		Number interpolateTween();
 		virtual void updateCustomTween() {}
 		void doOnComplete();
@@ -102,7 +102,6 @@ namespace Polycode {
 		*/
 		void setSpeed(Number speed);
 		
-		bool paused;
 
 	protected:
 	
@@ -117,6 +116,7 @@ namespace Polycode {
 		Number *targetVal;
 		Number localTargetVal;
 		Number tweenTime;
+		Timer *tweenTimer;
 	};
 	
 	/**

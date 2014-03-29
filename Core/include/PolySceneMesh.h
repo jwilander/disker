@@ -22,7 +22,7 @@ THE SOFTWARE.
  
 #pragma once
 #include "PolyGlobals.h"
-#include "PolyEntity.h"
+#include "PolySceneEntity.h"
 #include "PolyShader.h"
 
 namespace Polycode {
@@ -31,13 +31,11 @@ namespace Polycode {
 	class Mesh;
 	class Texture;
 	class Skeleton;
-	class Image;
-    class ResourcePool;
 	
 	/**
 	* 3D polygonal mesh instance. The SceneMesh is the base for all polygonal 3d geometry. It can have simple textures or complex materials applied to it.
 	*/
-	class _PolyExport SceneMesh : public Entity {
+	class _PolyExport SceneMesh : public SceneEntity {
 		public:
 		
 			/**
@@ -82,7 +80,7 @@ namespace Polycode {
 			/**
 			* Returns the texture applied.
 			*/				
-			Texture *getTexture() const;
+			Texture *getTexture();
 			
 			/**
 			* Returns the material applied.
@@ -95,8 +93,6 @@ namespace Polycode {
 			* @param clamp If true, clamps the texture to edges. See Texture for details on that.
 			*/
 			void loadTexture(const String& fileName);
-
-			void loadTextureFromImage(Image *image);
 			
 			/**
 			* Loads a skeleton from a file and applies it to the scene mesh.
@@ -125,7 +121,7 @@ namespace Polycode {
 			* Set material by name. You can create materials in material files and name them there, then use this to set a material by name to a scene mesh.
 			* @param materialName Name of material to apply.
 			*/									
-			void setMaterialByName(const String& materialName, ResourcePool *resourcePool = NULL);
+			void setMaterialByName(const String& materialName);
 			
 			/**
 			* Set the mesh this scene mesh renders.
@@ -150,19 +146,14 @@ namespace Polycode {
 			* If this is set to true, the mesh will be cached to a hardware vertex buffer if those are available. This can dramatically speed up rendering.
 			*/
 			void cacheToVertexBuffer(bool cache);
-				
-			void setLineWidth(Number newWidth);
-
-            String getFilename();
-            void setFilename(String fileName);
-        
-            void loadFromFile(String fileName);
-        
+	
+			unsigned int lightmapIndex;
+			
+			bool showVertexNormals;
+	
+					
 			Number lineWidth;
 			bool lineSmooth;
-			
-			Number pointSize;
-			bool pointSmooth;
 			
 			/**
 			* If true, will delete its Mesh upon destruction. (defaults to true)
@@ -173,31 +164,7 @@ namespace Polycode {
 			* If true, will delete its Skeleton upon destruction. (defaults to true)
 			*/ 			
 			bool ownsSkeleton;
-			
-			bool overlayWireframe;
-			Color wireFrameColor;	
-			
-			bool useGeometryHitDetection;
-			
-			bool customHitDetection(const Ray &ray);
-        
-            bool forceMaterial;
-        
-            virtual Entity *Clone(bool deepClone, bool ignoreEditorOnly) const;
-            virtual void applyClone(Entity *clone, bool deepClone, bool ignoreEditorOnly) const;
-        
-            
-            /**
-             * Normally, translucent textures do not affect the depth buffer, but if this flag is set to true, this entity's alpha channel is written to the depth buffer at a preset threshold. This flag is set to false by default.
-             */
-            bool alphaTest;
-            
-            /**
-             * If this flag is set to false, backface culling is disabled when rendering this entity, rendering both sides of each face. Set to true by default.
-             */
-            bool backfaceCulled;	
-        
-			
+		
 		protected:
 		
 			bool useVertexBuffer;
@@ -206,6 +173,5 @@ namespace Polycode {
 			Material *material;
 			Skeleton *skeleton;
 			ShaderBinding *localShaderOptions;
-            String fileName;
 	};
 }

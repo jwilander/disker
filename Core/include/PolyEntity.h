@@ -24,11 +24,9 @@
 #include "PolyGlobals.h"
 #include "PolyString.h"
 #include "PolyMatrix4.h"
-#include "PolyVector2.h"
 #include "PolyQuaternion.h"
 #include "PolyColor.h"
 #include "PolyRectangle.h"
-#include "PolyRay.h"
 #include "PolyEventDispatcher.h"
 #include <vector>
 
@@ -36,23 +34,11 @@ namespace Polycode {
 
 	class Renderer;
 
-	class _PolyExport MouseEventResult {
-		public:
-			bool hit;
-			bool blocked;
-	};
-
 	class _PolyExport EntityProp {
 	public:
 		String propName;
 		String propValue;		
 	};
-    
-    class _PolyExport AABB {
-        public:
-            Vector3 min;
-            Vector3 max;
-    };
 
 	class _PolyExport Rotation {
 		public:
@@ -78,13 +64,8 @@ namespace Polycode {
 	class _PolyExport Entity : public EventDispatcher {
 		public:
 			Entity();
-			
-			Entity(Number width, Number height, Number depth = 0.01);	
-			
 			virtual ~Entity();
 
-
-			void initEntity();
 			/**
 			* Main render method. Override this to do your own drawing.
 			*/
@@ -94,7 +75,7 @@ namespace Polycode {
 			*/			
 			virtual void Update(){};			
 
-			void transformAndRender();		
+			virtual void transformAndRender();		
 
 			void renderChildren();					
 		
@@ -108,7 +89,7 @@ namespace Polycode {
 			virtual Entity *Clone(bool deepClone, bool ignoreEditorOnly) const;
 
 			/**
- 			* This method must be implemented by all subclasses implementing Clone.
+ 			* This method must be implemented by all subvlasses implementing Clone.
  			*/
 			virtual void applyClone(Entity *clone, bool deepClone, bool ignoreEditorOnly) const;
 		
@@ -149,8 +130,6 @@ namespace Polycode {
 			
 			Matrix4 getConcatenatedMatrixRelativeTo(Entity *relativeEntity);
 			
-			Matrix4 getAnchorAdjustedMatrix();
-			
 			/** 
 			* Returns Same as getConcatenatedMatrix(), but contains only roll information for rotation. Used internally for billboards.
 			@return Entity's concatenated roll matrix.
@@ -178,24 +157,38 @@ namespace Polycode {
 			/** @name Hierarchy operations.
 			*  These methods add and remove entities to and from each other.
 			*/
-			//@{
+			//@{			
+			
+				/**
+			 * @name Child position operations.
+			 * 
+			 * Move a child in the list of children. Affects display
+			 * order of entities(entities further down in the list will
+			 * appear on top).
+			 */
+			//@{	
+			void moveChildUp(Entity *child);
+			void moveChildDown(Entity *child);
+			void moveChildTop(Entity *child);
+			void moveChildBottom(Entity *child);
+			//}@	
+			
+			/**
+			* @see addChild()
+			*/		
+			virtual void addEntity(Entity *newChild);
 
 			/**
 			* Adds another entity as a child. The children inherit the parent's transforms.
 			@param newChild The entity to be added.
 			*/					
-			virtual void addChild(Entity *newChild);
+			void addChild(Entity *newChild);
 			
 			/**
 			* Removes an entity from the entity's children.
 			@param entityToRemove Entity to be removed.
 			*/
-			virtual void removeChild(Entity *entityToRemove);
-
-			void moveChildUp(Entity *child);
-			void moveChildDown(Entity *child);
-			void moveChildTop(Entity *child);
-			void moveChildBottom(Entity *child);
+			void removeChild(Entity *entityToRemove);
 
 			/**
 			* Manually sets the entity's parent. This method does not add the entity to the parent and should not be called manually.
@@ -244,8 +237,6 @@ namespace Polycode {
 			*/			
 			Vector3 getPosition() const;
 			
-			Vector2 getPosition2D() const;
-			
 			/**
 			* Returns the entity's position added to the combined position of its parent. This method is here only for convenience of calculating certain properties and should not be used to get an entity's actual position in the world. To get the actual world position of the entity, use the entity's concatendated matrix.
 			@see getConcatenatedMatrix()
@@ -259,7 +250,7 @@ namespace Polycode {
 			@param y Y-axis value.
 			@param z Z-axis value.						
 			*/						
-			void setPosition(Number x, Number y, Number z=0.0);
+			void setPosition(Number x, Number y, Number z);
 			
 			/**
 			* Sets the entity's position with a vector.
@@ -285,7 +276,7 @@ namespace Polycode {
 			@param y Y-axis value.
 			@param z Z-axis value.						
 			*/						
-			void Translate(Number x, Number y, Number z=0.0);
+			void Translate(Number x, Number y, Number z);
 			
 			/**
 			* Translates the entity relative to its current position with a vector.
@@ -324,22 +315,15 @@ namespace Polycode {
 			@param y Y-axis value.
 			@param z Z-axis value.						
 			*/									
-			void Scale(Number x, Number y, Number z=0.0);
+			void Scale(Number x, Number y, Number z);
 			
-
-			/**
-			* Scales the entity relative to its current scale.
-			@param scale Scale vector.				
-			*/									
-			void Scale(const Vector3 &scale);			
-
 			/**
 			* Sets the entity's scale.
 			@param x X-axis value.
 			@param y Y-axis value.
 			@param z Z-axis value.						
 			*/									
-			void setScale(Number x, Number y, Number z=1.0);
+			void setScale(Number x, Number y, Number z);
 			
 			/**
 			* Sets the entity's scale.
@@ -358,12 +342,6 @@ namespace Polycode {
 			@return Entity's scale as a vector.
 			*/						
 			Vector3 getScale() const;
-        
-            /**
-             * Returns the entity's rotation as euler angles
-             @return Entity's rotation as euler angles
-             */
-            Vector3 getEulerRotation() const;
 		
 			/**
 			* Returns the entity's pitch combined with the combined pitch of its parent.
@@ -388,12 +366,6 @@ namespace Polycode {
 			*/
 			void rebuildRotation();					
 			
-            /**
-             * Sets rotation from euler angles
-             * @param rotation New rotation values
-             */
-            void setRotationEuler(const Vector3 &rotation);
-        
 			/**
 			* Sets the pitch rotation of the entity.
 			* @param pitch New pitch value in degrees.
@@ -447,24 +419,12 @@ namespace Polycode {
 			* @return Current roll value.
 			*/																										
 			Number getRoll() const;
-			
-			Number getWidth() const;
-
-			Number getHeight() const;
-
-			Number getDepth() const;
-			
-			void setWidth(Number width);
-			void setHeight(Number height);
-			void setDepth(Number depth);
-			
+		
 			/**
 			* Sets the rotation with quaternion value.
 			* @param Current yaw value.
 			*/																									
 			void setRotationQuat(Number w, Number x, Number y, Number z);
-			
-			void setRotationByQuaternion(const Quaternion &quaternion);
 			
 			/**
 			* Returns the current rotation as a quaternion.
@@ -525,16 +485,30 @@ namespace Polycode {
 			*/
 			//@{			
 	
+			/**
+			* Recalculates the bounding box of the entity based on its size.
+			*/
+			void recalculateBBox();
 			
-			void setAnchorPoint(const Vector3 &anchorPoint);
-			void setAnchorPoint(Number x, Number y, Number z);			
-			Vector3 getAnchorPoint() const;
+			/**
+			* Returns the bounding box radius.
+			* @return The bounding box radius.
+			*/			
+			Number getBBoxRadius() const;
 			
-			virtual MouseEventResult onMouseDown(const Ray &ray, int mouseButton, int timestamp);
-			virtual MouseEventResult onMouseUp(const Ray &ray, int mouseButton, int timestamp);
-			virtual MouseEventResult onMouseMove(const Ray &ray, int timestamp);
-			virtual MouseEventResult onMouseWheelUp(const Ray &ray, int timestamp);
-			virtual MouseEventResult onMouseWheelDown(const Ray &ray, int timestamp);
+			/**
+			* Returns the entity's bounding box radius compounded from its children's bounding box radii.
+			* @return The compound bounding box radius.
+			*/						
+			Number getCompoundBBoxRadius() const;
+			
+			/**
+			* Sets the bounding box radius.
+			* @param rad New bounding box radius.
+			*/
+			void setBBoxRadius(Number rad);		
+			
+					
 
 			//@}			
 			// ----------------------------------------------------------------------------------------------------------------
@@ -565,8 +539,21 @@ namespace Polycode {
 			* matrix when billboardMode is enabled
 			*/
 			bool billboardIgnoreScale;
-
-
+			
+			/**
+			* Normally, translucent textures do not affect the depth buffer, but if this flag is set to true, this entity's alpha channel is written to the depth buffer at a preset threshold. This flag is set to false by default.
+			*/			
+			bool alphaTest;
+			
+			/**
+			* If this flag is set to false, backface culling is disabled when rendering this entity, rendering both sides of each face. Set to true by default.
+			*/
+			bool backfaceCulled;	
+		
+			/**
+			* If this flag is set to true, the entity will render in wireframe. 
+			*/							
+			bool renderWireframe;
 
 			/**
 			* The entity's color.
@@ -594,7 +581,7 @@ namespace Polycode {
 			bool depthTest;
 			
 			/**
-			* Entity blending mode. Possible values are Renderer::BLEND_MODE_NONE, Renderer::BLEND_MODE_NORMAL, Renderer::BLEND_MODE_LIGHTEN, Renderer::BLEND_MODE_COLOR, Renderer::BLEND_MODE_PREMULTIPLIED, Renderer::BLEND_MODE_MULTIPLY. See the Renderer class for details on individual blending modes.
+			* Entity blending mode. Possible values are Renderer::BLEND_MODE_NORMAL, Renderer::BLEND_MODE_LIGHTEN, Renderer::BLEND_MODE_COLOR, Renderer::BLEND_MODE_PREMULTIPLIED, Renderer::BLEND_MODE_MULTIPLY. See the Renderer class for details on individual blending modes.
 			*/
 			int blendingMode;	
 			
@@ -641,24 +628,29 @@ namespace Polycode {
 			
 			Entity *getEntityById(String id, bool recursive) const;
 			std::vector<Entity*> getEntitiesByTag(String tag, bool recursive) const;
+						
+			Vector3 getChildCenter() const;
 			
 			std::vector <EntityProp> entityProps;
 			String getEntityProp(const String& propName);
 			void setEntityProp(const String& propName, const String& propValue);
 			
-			void setInverseY(bool val);
-			bool getInverseY();
-			
 			void doUpdates();				
 			virtual Matrix4 buildPositionMatrix();
-			void setRenderer(Renderer *renderer);
+			virtual void adjustMatrixForChildren(){}
+			void setRenderer(Renderer *renderer);						
 			
-			virtual bool customHitDetection(const Ray &ray) { return true; }			
-					
+			
+			Vector3 bBox;			
 			bool ignoreParentMatrix;
 						
 			bool enableScissor;	
 			Polycode::Rectangle scissorBox;			
+		
+			Vector3 position;
+			Vector3 scale;		
+			Rotation rotation;
+			
 			
 			bool editorOnly;
 	
@@ -677,77 +669,34 @@ namespace Polycode {
 			void clearTags();
 			void addTag(String tag); 
 
-			//@}
-        
-			/**
-			* If set to true, will cast shadows (Defaults to true).
-			*/
-			bool castShadows;
-			
-			int collisionShapeType;	
-			bool processInputEvents;			
-			bool blockMouseInput;
-																					
-			void setHitbox(Number width, Number height) {}
-            Vector2 getScreenPosition(const Matrix4 &projectionMatrix, const Matrix4 &cameraMatrix, const Polycode::Rectangle &viewport);
-			Vector2 getScreenPositionForMainCamera();
 
-			bool hitTest(Number x, Number y) const { return false; }
-			bool hitTest(Vector2 v) const { return false; }
 
-			bool snapToPixels;			
-			bool mouseOver;
-        
-            static int defaultBlendingMode;
-        
-            void recalculateAABBAllChildren();
-            void recalculateAABB();
-        
-            /*
-             Return axis-aligned bounding box in world space.
-             */
-            AABB getWorldAABB();
-        
-            Vector3 getLocalBoundingBox();
-            void setLocalBoundingBox(const Vector3 box);
-            void setLocalBoundingBox(Number x, Number y, Number z);
-            void setLocalBoundingBoxX(Number x);
-            void setLocalBoundingBoxY(Number y);
-            void setLocalBoundingBoxZ(Number z);
-        
-            bool rendererVis;
-
+			//@}		
 		protected:
 		
-            AABB aabb;
-            Vector3 bBox;
-        
-			int lastClickTicks;
-			Number yAdjust;
 			std::vector<String> *tags;
+		
+			void checkTransformSetters();
 		
 			void *userData;
 		
 			std::vector<Entity*> children;
 
-			Vector3 anchorPoint;
+			Vector3 childCenter;
+			Number bBoxRadius;		
 		
-			Vector3 position;
-			Vector3 scale;		
-			Vector3 rotation;
+			Vector3 _position;
+			Vector3 _scale;		
+			Rotation _rotation;
 	
 			Quaternion rotationQuat;
 			
 			bool lockMatrix;
 			bool matrixDirty;
-        
-			Matrix4 transformMatrix;
+			Matrix4 transformMatrix;		
+			Number matrixAdj;		
 			Entity *parentEntity;
 		
 			Renderer *renderer;
 	};
-	
-	typedef Entity SceneEntity;
-	typedef Entity ScreenEntity;
-			
 }

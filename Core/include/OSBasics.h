@@ -24,6 +24,7 @@
 
 #include "PolyGlobals.h"
 #include "PolyString.h"
+#include <stdlib.h>
 
 struct PHYSFS_File;
 

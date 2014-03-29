@@ -32,7 +32,7 @@ namespace Polycode {
 		using UIElement::Resize;
 
 		UIVScrollBar(Number width, Number height, Number initialRatio);
-		virtual ~UIVScrollBar();
+		~UIVScrollBar();
 		
 		void Update();
 		Number getScrollValue();

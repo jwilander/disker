@@ -54,9 +54,8 @@ namespace Polycode {
 		
 		ServerClientEvent *handlePacket(Packet *packet);
 		
-		unsigned int    clientID;
+		unsigned int clientID;
 		PeerConnection *connection;
-        bool clientReady;
 	};
 		
 	class _PolyExport ServerEvent : public Event {

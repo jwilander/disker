@@ -23,7 +23,6 @@ THE SOFTWARE.
 #pragma once
 #include "PolyGlobals.h"
 #include "PolySceneMesh.h"
-#include "PolyMesh.h"
 
 namespace Polycode {
 
@@ -46,10 +45,6 @@ namespace Polycode {
 			ScenePrimitive(int type, Number v1=1.0f, Number v2=1.0f, Number v3=1.0f,Number v4=0.0f,Number v5=0.0f);
 			virtual ~ScenePrimitive();
 
-			void setPrimitiveOptions(int type, Number v1=1.0f, Number v2=1.0f, Number v3=1.0f,Number v4=0.0f,Number v5=0.0f);
-
-			void recreatePrimitive();
-		
 			/**
 			* A cube.
 			* v1 - X size
@@ -65,13 +60,14 @@ namespace Polycode {
 			*/			
 			static const int TYPE_PLANE = 1;			
 
-            /**
-             * A vertical plane.
-             * v1 - X size
-             * v2 - Y size
-             */
-            static const int TYPE_VPLANE = 2;
-        
+			/**
+			* A sphere.
+			* v1 - Sphere radius
+			* v2 - Lat segments				
+			* v3 - Long segments			
+			*/						
+			static const int TYPE_SPHERE = 2;
+
 			/**
 			* A cylinder.
 			* v1 - Cylinder length			
@@ -80,21 +76,20 @@ namespace Polycode {
 			*/			
 			static const int TYPE_CYLINDER = 3;
 
-            /**
-             * A cylinder.
-             * v1 - Cylinder length
-             * v2 - Cylinder radius
-             * v3 - Number of segments.
-             */
-            static const int TYPE_UNCAPPED_CYLINDER = 4;
+			/**
+			* A cone.
+			* v1 - Cone length.
+			* v2 - Cone raidus.
+			* v3 - Number of segments.
+			*/			
+			static const int TYPE_CONE = 4;
 
-            /**
-             * A sphere.
-             * v1 - Sphere radius
-             * v2 - Lat segments
-             * v3 - Long segments
-             */
-            static const int TYPE_SPHERE = 5;
+			/**
+			* A vertical plane.
+			* v1 - X size
+			* v2 - Y size						
+			*/			
+			static const int TYPE_VPLANE = 5;			
 
 			/**
 			* A torus.
@@ -104,51 +99,20 @@ namespace Polycode {
 			* v4- Number of pipe segments.
 			*/			
 			static const int TYPE_TORUS = 6;	
-			     
-            /**
-             * A cone.
-             * v1 - Cone length.
-             * v2 - Cone raidus.
-             * v3 - Number of segments.
-             */
-            static const int TYPE_CONE = 7;
+			
 
 			/**
-			* A 2D circle.
-			* v1 - X size
-			* v2 - Y size
-			* v3 - Number of segments
+			* A cylinder.
+			* v1 - Cylinder length			
+			* v2 - Cylinder radius
+			* v3 - Number of segments.
 			*/			
-			static const int TYPE_CIRCLE = 8;			
+			static const int TYPE_UNCAPPED_CYLINDER = 7;
+							
 
-            /**
-             * A 2D line circle.
-             * v1 - X size
-             * v2 - Y size
-             * v3 - Number of segments
-             */
-            static const int TYPE_LINE_CIRCLE = 9;
-
-            int getPrimitiveType() const;
-        
-            Number getPrimitiveParameter1() const;
-            Number getPrimitiveParameter2() const;
-            Number getPrimitiveParameter3() const;
-            Number getPrimitiveParameter4() const;
-            Number getPrimitiveParameter5() const;
-        
-            virtual Entity *Clone(bool deepClone, bool ignoreEditorOnly) const;
-            virtual void applyClone(Entity *clone, bool deepClone, bool ignoreEditorOnly) const;
 		
 		protected:
-
-			int type;
-			Number v1;
-			Number v2;
-			Number v3;
-			Number v4;
-			Number v5;			
-												
+		
 	};
 	
 }

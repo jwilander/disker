@@ -38,14 +38,14 @@ namespace Polycode {
 	public:
         /**
         * Create a scroll container.
-        * @param scrolledEntity The Entity that should be scrolled using this element.
+        * @param scrolledEntity The ScreenEntity that should be scrolled using this element.
         * @param hScroll Whether the child should be scrolled horizontally.
         * @param vScroll Whether the child should be scrolled vertically.
         * @param width The width of the scroll container.
         * @param height The height of the scroll container.
         */
-		UIScrollContainer(Entity *scrolledEntity, bool hScroll, bool vScroll, Number width, Number height);
-		virtual ~UIScrollContainer();
+		UIScrollContainer(ScreenEntity *scrolledEntity, bool hScroll, bool vScroll, Number width, Number height);
+		~UIScrollContainer();
 
         /**
         * Update what size the content child is expected to have.
@@ -94,8 +94,8 @@ namespace Polycode {
         */
 		Vector2 getContentSize();
 
-		void _onMouseWheelDown();
-		void _onMouseWheelUp();
+		void onMouseWheelDown(Number x, Number y);
+		void onMouseWheelUp(Number x, Number y);
 
 		void handleEvent(Event *event);
 
@@ -114,7 +114,7 @@ namespace Polycode {
 		Number contentWidth;
 		Number contentHeight;
 
-		Entity *scrollChild;
+		ScreenEntity *scrollChild;
 
 		bool hasHScroll;
 		bool hasVScroll;

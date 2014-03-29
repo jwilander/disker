@@ -49,5 +49,5 @@ void PlayerDeath::Respawn()
     player->ZeroVelocity();
     player->health = MAX_PLAYER_HEALTH;
     player->state = Player::ALIVE;
-    scene->addCollisionChild(player->sprite, PhysicsScene2DEntity::ENTITY_CIRCLE);
+    scene->addCollisionChild(player->sprite, PhysicsScreenEntity::ENTITY_CIRCLE);
 }
