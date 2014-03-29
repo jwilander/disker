@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Slaughter Games. All rights reserved.
 //
 
+#ifndef __Disker__InputHandler__
+#define __Disker__InputHandler__
+
 #include <Polycode.h>
 #include "PolycodeView.h"
 #include "Player.h"
-
-#ifndef __Disker__InputHandler__
-#define __Disker__InputHandler__
 
 class InputHandler : public EventHandler
 {
@@ -24,8 +24,8 @@ private:
     CoreInput *coreInput;
     Player *player;
     
-    void handleKeyDown(PolyKEY key);
-    void handleKeyUp(PolyKEY key);
+    void HandleKeyDown(PolyKEY key);
+    void HandleKeyUp(PolyKEY key);
 };
 
 #endif /* defined(__Disker__InputHandler__) */

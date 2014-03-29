@@ -21,17 +21,17 @@ void InputHandler::handleEvent(Event *e)
         InputEvent *ie = (InputEvent*) e;
         switch (ie->getEventCode()) {
             case InputEvent::EVENT_KEYDOWN:
-                handleKeyDown(ie->getKey());
+                HandleKeyDown(ie->getKey());
                 break;
             case InputEvent::EVENT_KEYUP:
-                handleKeyUp(ie->getKey());
+                HandleKeyUp(ie->getKey());
                 break;
         }
         
     }
 }
 
-void InputHandler::handleKeyDown(PolyKEY key)
+void InputHandler::HandleKeyDown(PolyKEY key)
 {
     switch (key) {
         case Polycode::KEY_w:
@@ -51,7 +51,7 @@ void InputHandler::handleKeyDown(PolyKEY key)
     }
 }
 
-void InputHandler::handleKeyUp(PolyKEY key)
+void InputHandler::HandleKeyUp(PolyKEY key)
 {
     switch (key) {
         case Polycode::KEY_w:

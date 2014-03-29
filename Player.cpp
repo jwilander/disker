@@ -13,13 +13,14 @@ Player::Player(PhysicsScreen *scene)
     health = 1000;
     direction = 0.0f;
     
-    // TODO - figure out relative path
-    sprite = new SceneSprite("/usr/local/joram/disker/Resources/playerSprite.png", 192, 182);
-    sprite->setScale(0.3f, 0.3f);
+    // TODO - figure out relative path and get rid of magic numbers
+    sprite = new SceneSprite("/usr/local/joram/disker/Resources/playerSprite.png", 71.25, 67.5);
     sprite->custEntityType = ENTITY_PLAYER;
-    scene->addCollisionChild(sprite, PhysicsScene2DEntity::ENTITY_CIRCLE, false);
+    sprite->setUserData(this);
+    scene->addCollisionChild(sprite, PhysicsScene2DEntity::ENTITY_CIRCLE);
     
     playerMovement = new PlayerMovement(this, scene);
+    playerDeath = new PlayerDeath(this, scene);
 }
 
 bool Player::Update(float elapsed)
@@ -71,8 +72,18 @@ void Player::Shoot()
 
 /* end PlayerAttack functions */
 
+/* begin PlayerDeath functions */
+
+void Player::Respawn()
+{
+    playerDeath->Respawn();
+}
+
+/* end PlayerDeath functions */
+
 Player::~Player()
 {
     delete sprite;
     delete playerMovement;
+    delete playerDeath;
 }

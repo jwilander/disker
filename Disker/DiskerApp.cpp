@@ -19,6 +19,9 @@ DiskerApp::DiskerApp(PolycodeView *view) {
     inputHandler = new InputHandler(core->getInput(), player);
     core->getInput()->addEventListener(inputHandler, InputEvent::EVENT_KEYDOWN);
     core->getInput()->addEventListener(inputHandler, InputEvent::EVENT_KEYUP);
+    
+    collisionHandler = new CollisionHandler(scene, player);
+    scene->addEventListener(collisionHandler, PhysicsScene2DEvent::EVENT_NEW_SHAPE_COLLISION);
 }
 
 bool DiskerApp::Update() {
@@ -32,6 +35,7 @@ bool DiskerApp::Update() {
 
 DiskerApp::~DiskerApp() {
     delete inputHandler;
+    delete collisionHandler;
     delete player;
     delete scene;
     delete core;

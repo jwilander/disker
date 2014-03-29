@@ -14,13 +14,16 @@
 #include "PolycodeView.h"
 #include "Polycode2DPhysics.h"
 #include "PlayerMovement.h"
+#include "PlayerDeath.h"
 
 class PlayerMovement;
+class PlayerDeath;
 
 const String ENTITY_PLAYER = "player";
 
 class Player {
     friend class PlayerMovement;
+    friend class PlayerDeath;
     
 public:
     Player(PhysicsScreen *scene);
@@ -38,10 +41,14 @@ public:
     
     /* PlayerAttack functions */
     void Shoot();
+    
+    /* PlayerDeath functions */
+    void Respawn();
 
 private:
     /* friend logic classes, for encapsulating all player logic */
     PlayerMovement *playerMovement;
+    PlayerDeath *playerDeath;
     
     /* player variables */
     int health;

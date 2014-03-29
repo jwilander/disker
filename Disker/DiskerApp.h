@@ -3,6 +3,7 @@
 #include "Polycode2DPhysics.h"
 #include "Player.h"
 #include "Boundary.h"
+#include "CollisionHandler.h"
 #include "InputHandler.h"
 
 using namespace Polycode;
@@ -21,6 +22,7 @@ private:
     
     // handlers and managers
     InputHandler *inputHandler;
+    CollisionHandler *collisionHandler;
     
     // world objects
     Player *player;

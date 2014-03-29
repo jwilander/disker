@@ -45,6 +45,8 @@
 		84836A7A18E52DBA0088AEBA /* libBulletSoftBodySolvers_OpenCL_Mini.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84836A7118E52DBA0088AEBA /* libBulletSoftBodySolvers_OpenCL_Mini.a */; };
 		84836A7B18E52DBA0088AEBA /* libLinearMath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84836A7218E52DBA0088AEBA /* libLinearMath.a */; };
 		84836A7C18E52DBA0088AEBA /* libMiniCL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84836A7318E52DBA0088AEBA /* libMiniCL.a */; };
+		84E5C39218E63B700037180B /* CollisionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E5C39018E63B700037180B /* CollisionHandler.cpp */; };
+		84E5C39518E64F960037180B /* PlayerDeath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E5C39318E64F960037180B /* PlayerDeath.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +101,10 @@
 		84836A7118E52DBA0088AEBA /* libBulletSoftBodySolvers_OpenCL_Mini.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBulletSoftBodySolvers_OpenCL_Mini.a; path = Modules/Dependencies/lib/libBulletSoftBodySolvers_OpenCL_Mini.a; sourceTree = "<group>"; };
 		84836A7218E52DBA0088AEBA /* libLinearMath.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLinearMath.a; path = Modules/Dependencies/lib/libLinearMath.a; sourceTree = "<group>"; };
 		84836A7318E52DBA0088AEBA /* libMiniCL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMiniCL.a; path = Modules/Dependencies/lib/libMiniCL.a; sourceTree = "<group>"; };
+		84E5C39018E63B700037180B /* CollisionHandler.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = CollisionHandler.cpp; sourceTree = "<group>"; };
+		84E5C39118E63B700037180B /* CollisionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionHandler.h; sourceTree = "<group>"; };
+		84E5C39318E64F960037180B /* PlayerDeath.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; path = PlayerDeath.cpp; sourceTree = "<group>"; };
+		84E5C39418E64F960037180B /* PlayerDeath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerDeath.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +236,8 @@
 			children = (
 				84438B8D18E5328200D1C6A6 /* Boundary.cpp */,
 				84438B8E18E5328200D1C6A6 /* Boundary.h */,
+				84E5C39018E63B700037180B /* CollisionHandler.cpp */,
+				84E5C39118E63B700037180B /* CollisionHandler.h */,
 				84836A3818E52ACA0088AEBA /* InputHandler.cpp */,
 				84836A3918E52ACA0088AEBA /* InputHandler.h */,
 				84836A3A18E52ACA0088AEBA /* Player.cpp */,
@@ -238,6 +246,8 @@
 				84836A3D18E52ACA0088AEBA /* PlayerMovement.h */,
 				6D2800FA13760F2C00BD8D0D /* DiskerApp.cpp */,
 				6D2800FB13760F2C00BD8D0D /* DiskerApp.h */,
+				84E5C39318E64F960037180B /* PlayerDeath.cpp */,
+				84E5C39418E64F960037180B /* PlayerDeath.h */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -315,7 +325,9 @@
 				84836A3E18E52ACA0088AEBA /* InputHandler.cpp in Sources */,
 				84836A4018E52ACA0088AEBA /* PlayerMovement.cpp in Sources */,
 				84836A4918E52CE80088AEBA /* main.m in Sources */,
+				84E5C39218E63B700037180B /* CollisionHandler.cpp in Sources */,
 				6D2800FC13760F2C00BD8D0D /* DiskerApp.cpp in Sources */,
+				84E5C39518E64F960037180B /* PlayerDeath.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
