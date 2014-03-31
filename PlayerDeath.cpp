@@ -16,13 +16,13 @@ PlayerDeath::PlayerDeath(Player *player, PhysicsScreen *scene)
     this->scene = scene;
     
     deathTimer = 0.0f;
+    
     playerShards.push_back(new ScreenImage("/usr/local/joram/disker/Resources/playerShard1.png"));
     playerShards.push_back(new ScreenImage("/usr/local/joram/disker/Resources/playerShard2.png"));
     playerShards.push_back(new ScreenImage("/usr/local/joram/disker/Resources/playerShard3.png"));
     playerShards.push_back(new ScreenImage("/usr/local/joram/disker/Resources/playerShard4.png"));
     playerShards.push_back(new ScreenImage("/usr/local/joram/disker/Resources/playerShard5.png"));
-    playerShards.push_back(new ScreenImage("/usr/local/joram/disker/Resources/playerShard5.png"));
-    
+    playerShards.push_back(new ScreenImage("/usr/local/joram/disker/Resources/playerShard5.png"));    
 }
 
 bool PlayerDeath::Update(float elapsed)
@@ -96,4 +96,11 @@ void PlayerDeath::Respawn()
     player->health = MAX_PLAYER_HEALTH;
     player->state = Player::ALIVE;
     scene->addCollisionChild(player->sprite, PhysicsScreenEntity::ENTITY_CIRCLE);
+}
+
+PlayerDeath::~PlayerDeath()
+{
+    for (int i = 0; i < playerShards.size(); ++i) {
+        delete playerShards[i];
+    }
 }

@@ -19,6 +19,7 @@ class PlayerDeath
     
 public:
     PlayerDeath(Player *player, PhysicsScreen *scene);
+    ~PlayerDeath();
     
 private:
     Player *player;
