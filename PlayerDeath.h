@@ -24,11 +24,14 @@ private:
     Player *player;
     PhysicsScreen *scene;
     float deathTimer;
-    
+    std::vector<ScreenImage*> playerShards;
     bool Update(float elapsed);
     
     void Kill();
     void Respawn();
+    void AddPlayerShards();
+    void RemovePlayerShards();
+    void ApplyBlast(ScreenEntity * entity, Vector2 blastPoint, float blastPower);
     
 };
 

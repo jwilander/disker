@@ -9,10 +9,9 @@ DiskerApp::DiskerApp(PolycodeView *view) {
 	CoreServices::getInstance()->getResourceManager()->addArchive("../Resources/default.pak");
 	CoreServices::getInstance()->getResourceManager()->addDirResource("default");
     
-    scene = new PhysicsScreen(0.1, 60);
-    scene->setGravity(Vector2(0.0f,0.0f));
+    scene = new PhysicsScreen(5, 60);
+    //scene->setGravity(Vector2(0.0f,0.0f));
     scene->setScreenOffset(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
-    //scene->getActiveCamera()->setOrthoSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     
     player = new Player(scene);
     
