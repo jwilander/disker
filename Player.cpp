@@ -40,6 +40,7 @@ bool Player::Update(float elapsed)
     return true;
 }
 
+/* damage the player's health */
 void Player::Damage(int amount)
 {
     /* don't allow increasing health */

@@ -31,6 +31,7 @@ void CollisionHandler::handleEvent(Event *e)
     }
 }
 
+/* handles all the possible cases for when collisions start */
 void CollisionHandler::HandleCollisionStart(PhysicsScreenEvent *pe)
 {
     String entityType1 = pe->entity1->custEntityType;

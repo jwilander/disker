@@ -16,6 +16,7 @@ InputHandler::InputHandler(CoreInput *coreInput, Player *player)
 
 void InputHandler::handleEvent(Event *e)
 {
+    /* make sure we are getting events from the correct place */
     if (e->getDispatcher() == coreInput)
     {
         InputEvent *ie = (InputEvent*) e;
@@ -31,6 +32,7 @@ void InputHandler::handleEvent(Event *e)
     }
 }
 
+/* handles all user input that happens on a key press */
 void InputHandler::HandleKeyDown(PolyKEY key)
 {
     switch (key) {
@@ -51,6 +53,7 @@ void InputHandler::HandleKeyDown(PolyKEY key)
     }
 }
 
+/* handles all user input on a key release */
 void InputHandler::HandleKeyUp(PolyKEY key)
 {
     switch (key) {

@@ -37,7 +37,7 @@ bool PlayerDeath::Update(float elapsed)
             deathTimer = 0.0f;
             return true;
         }
-    /* if player as been dying long enough, update state to DEAD */
+    /* if player has been dying long enough, update state to DEAD */
     } else if (player->state == Player::DYING) {
         deathTimer += elapsed;
         if (deathTimer >= DYING_TIME)
@@ -51,6 +51,7 @@ bool PlayerDeath::Update(float elapsed)
     return true;
 }
 
+/* add to scene multiple physics objects repesenting broken pieces of the player */
 void PlayerDeath::AddPlayerShards()
 {
     Vector2 playerPos = player->sprite->getPosition2D();
@@ -58,6 +59,7 @@ void PlayerDeath::AddPlayerShards()
     playerDir.Normalize();
     Vector2 shardPosition(playerPos.x, playerPos.y);
     
+    // TODO - place shards of player more intelligently
     for (int i = 0; i < playerShards.size(); ++i)
     {
         playerShards[i]->setPosition(shardPosition.x + playerDir.x * i*2, shardPosition.y + playerDir.y * i*2);
@@ -67,6 +69,7 @@ void PlayerDeath::AddPlayerShards()
     }
 }
 
+/* remove all player shard objects from the scene */
 void PlayerDeath::RemovePlayerShards()
 {
     for (int i = 0; i < playerShards.size(); ++i) {
@@ -74,6 +77,7 @@ void PlayerDeath::RemovePlayerShards()
     }
 }
 
+/* imitates an explosion at blastPoint and applies the correct impulse to the specified object */
 void PlayerDeath::ApplyBlast(ScreenEntity *entity, Vector2 blastPoint, float blastPower)
 {
     Vector2 direction = entity->getPosition2D() - blastPoint;

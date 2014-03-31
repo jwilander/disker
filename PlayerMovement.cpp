@@ -75,6 +75,7 @@ bool PlayerMovement::Update(float elapsed)
     return true;
 }
 
+/* initiates motion sequence */
 void PlayerMovement::StartMove(MovementType moveType)
 {
     if (moveType == FORWARD)
@@ -89,18 +90,21 @@ void PlayerMovement::StartMove(MovementType moveType)
     }
 }
 
+/* ends motion sequence */
 void PlayerMovement::StopMove()
 {
     accelerationX = 0.0f;
     accelerationY = 0.0f;
 }
 
+/* stops all player movement */
 void PlayerMovement::ZeroVelocity()
 {
     velocityX = 0.0f;
     velocityY = 0.0f;
 }
 
+/* starts turn sequence */
 void PlayerMovement::StartTurn(TurnType turnType)
 {
     if (turnType == CLOCKWISE)
@@ -113,6 +117,7 @@ void PlayerMovement::StartTurn(TurnType turnType)
     }
 }
 
+/* ends turn sequence */
 void PlayerMovement::StopTurn()
 {
     rollSpeed = 0.0f;
